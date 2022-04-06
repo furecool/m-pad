@@ -1,0 +1,248 @@
+<template>
+  <div class="service-stat">
+
+    <div class="rectWrapper">
+
+      <div class="rectChart"></div>    
+
+      <ul class="label-list">
+        <li v-for="(li, index) in labelList" :key="li.id"><i class="fa-solid fa-square" :style="labelColor[index]"></i> {{li}}</li>
+      </ul>  
+
+    </div>      
+
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'ServiceStat',
+  props: {
+    obj: {}
+  },
+  data() {
+    return {
+      labelList: [
+        '等待時間',
+        '作業時間',
+        '暫停時間',
+        '綜合指標',
+        '服務人數',
+        '滿意度',
+      ],
+      labelColor: [
+        {color:'#1C58C8'},
+        {color:'#E67399'},
+        {color:'#00D9D1'},
+        {color:'#80C400'},
+        {color:'#E94024'},
+        {color:'#7D4BC5'}
+        // ' #1C58C8',' #E67399',' #00D9D1',' #80C400',' #E94024',' #7D4BC5'
+      ],
+      tData: {
+        waitTMax: 1200, // 30:00
+        waitTMin: 0,
+        workTMax: 1800, // 30:00
+        workTMin: 0,
+        breakTMax: 600, // 04:00
+        breakTMin: 0,
+        avgPoint: 10,
+        serveP: 15,
+        sati: 5,
+      },
+      targetObj: {
+        waitT: 435,
+        workT: 0,
+        breakT: 60,
+        avgPoint: 7,
+        serveP: 11,
+        sati: 3,
+      },
+      dataSet: [],
+      width: 350,
+      height: 350,
+      padding: {
+        top: 40,
+        right: 20,
+        bottom: 20,
+        left: 20
+      },
+      rectStep: 50,
+      rectWidth: 45,
+      maxValue: 1,
+    }
+  },
+  mounted() {
+
+
+    this.dataGen();
+    this.draw();
+    
+  },
+  watch: {
+
+    obj: function() {
+
+      this.targetObj = {
+        waitT: this.obj.waitT,     // 07:00
+        workT: this.obj.workT,     // 08:30
+        breakT: this.obj.breakT,     // 01:00
+        avgPoint: this.obj.avgPoint,
+        serveP: this.obj.serveP,
+        sati: this.obj.sati,
+      }
+
+      this.dataGen();
+      this.draw();
+
+      // console.log(this.targetObj)
+      
+    }
+    
+  },
+  computed: {
+    graphicHeight() {
+      return  this.height - this.padding.top - this.padding.bottom
+    }
+  },
+  methods: {
+
+    dataGen() {
+      this.dataSet = [
+          (this.tData.waitTMax-this.targetObj.waitT)/(this.tData.waitTMax-this.tData.waitTMin),
+          (this.tData.workTMax-this.targetObj.workT)/(this.tData.workTMax-this.tData.workTMin),
+          (this.tData.breakTMax-this.targetObj.breakT)/(this.tData.breakTMax-this.tData.breakTMin),
+          (this.targetObj.avgPoint/this.tData.avgPoint),
+          (this.targetObj.serveP/this.tData.serveP),
+          (this.targetObj.sati/this.tData.sati),
+      ]
+    },
+
+    fillRect(target){ // 用線性比例尺改寫
+        var that = this
+        var linear = d3.scale.linear() // 建立一個線性比例尺
+            .domain([0,this.maxValue]) // 設定定義域 maxValue
+            .range([0,this.graphicHeight]) // 設定值域 graphicHeight
+        
+        var color = [' #1C58C8',' #E67399',' #00D9D1',' #80C400',' #E94024',' #7D4BC5']
+        // var color = [' #4B93C5',' #C54B93',' #56C54B',' #C5BA4B',' #4B56C5',' #7D4BC5']
+
+        target.attr("fill", function(d,i) {
+            return color[i]
+        })
+            .attr("x", function(d,i){
+                return that.padding.left + i * that.rectStep
+            })
+            .attr("y", function(d){
+                return that.height - that.padding.bottom - linear(d)
+            })
+            .attr("width", that.rectWidth)
+            .attr("height", function(d){
+                return linear(d)
+            })
+    },
+
+    fillText(target){ // 繪製文字的部份
+        var that = this
+        target.attr("fill","black")
+        .attr("font-size","1rem")
+        .attr("font-weight","bold")
+        .attr("text-anchor","middle")
+        .attr("x", function(d,i){
+            return that.padding.left + i * that.rectStep
+        })
+        .attr("y", function(d){
+            return that.height - 2*that.padding.bottom - that.graphicHeight * (d / that.maxValue)
+        })
+        .attr("dx", that.rectWidth/2)
+        .attr("dy", "1rem")
+        .text(function(d,i){
+
+            function time(t) {
+                let minDotSec = t/60
+                let min = Math.floor(minDotSec)
+                let sec = Math.floor((minDotSec - min)*60)
+                return min.toString().padStart(2,'0') + ':' + sec.toString().padStart(2,'0')
+            }
+            if(i==0) { return time(that.targetObj.waitT) }
+            else if(i==1) { return time(that.targetObj.workT) }
+            else if(i==2) { return time(that.targetObj.breakT) }
+            else if(i==3) { return that.targetObj.avgPoint }
+            else if(i==4) { return that.targetObj.serveP }
+            else if(i==5) { return that.targetObj.sati }
+            // return targetObj.waitT
+        })
+    },
+
+    draw(){ // 呼叫以下的function 
+    
+        if(document.querySelector("svg")) {
+          document.querySelector("svg").parentElement.removeChild(document.querySelector("svg"))
+        }
+
+        var svg = d3.select(".rectChart")
+        .append("svg")
+        .attr("width", this.width)
+        .attr("height", this.height)
+
+        var updateRect = svg.selectAll("rect").data(this.dataSet) // -- 繪製長條圖 --
+        var enterRect = updateRect.enter()
+        var exitRect = updateRect.exit()
+
+        this.fillRect(updateRect)
+        this.fillRect(enterRect.append("rect"))
+        exitRect.remove()
+
+        var updateText = svg.selectAll("text").data(this.dataSet) // -- 繪製數字 --
+        var enterText = updateText.enter()
+        var exitText = updateText.exit()
+
+        this.fillText(updateText)
+        this.fillText(enterText.append("text"))
+        exitText.remove()
+
+        
+    },
+
+
+  }
+}
+</script>
+
+<style>
+
+  .service-stat {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 50px;
+  }
+
+  .rectWrapper {
+    display: flex;
+    align-items: center;
+    width: 85%;
+    background: #fff;
+  }
+
+  .rectChart {
+    flex: 3;
+  }
+
+  .label-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    list-style: none;
+  }
+
+  .label-list li {
+    font-size: 1.2rem;
+    line-height: 2rem;
+    font-weight: 500;
+  }
+
+</style>
