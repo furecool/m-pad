@@ -406,7 +406,7 @@ export default {
 
     .service-target {
       position: relative;
-      padding: 0 100px;
+      padding: 0 30px;
     }
 
     .radarChart {

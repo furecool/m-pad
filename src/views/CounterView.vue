@@ -342,6 +342,7 @@ export default {
 
   .service-chart {
     width: 95%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -359,13 +360,17 @@ export default {
   }
 
   .service-chart-content {
-    width: 90%;
+    width: 100%;
+    /* height: 100%; */
     display: flex;
+    justify-content: space-between;
+    /* flex-direction: column; */
+    padding: 15px 0;
     margin: 0px 0;
   }
 
   .service {
-    width: 20%;
+    width: 160px;
     display: flex;
     align-items: center;
     margin: 20px auto;
@@ -374,7 +379,7 @@ export default {
 
   .service-col {
     height: 100%;
-    width: 130px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -387,7 +392,7 @@ export default {
   }
 
   .chart {
-    width: 80%;
+    width: 100%;
   }
 
   .chart img {

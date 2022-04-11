@@ -217,7 +217,7 @@ export default {
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 0 50px;
+    padding: 0;
   }
 
   .rectWrapper {
@@ -243,6 +243,12 @@ export default {
     font-size: 1.2rem;
     line-height: 2rem;
     font-weight: 500;
+  }
+
+  @media (max-width:768px) {
+    .rectWrapper {
+      flex-direction: column;
+    }
   }
 
 </style>
