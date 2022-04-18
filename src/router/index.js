@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import InlineView from '../views/InlineView.vue'
+import CounterView from '../views/CounterView.vue'
 
 Vue.use(VueRouter)
 
@@ -13,14 +14,12 @@ const routes = [
   {
     path: '/counter',
     name: 'counter',
-    component: function () {
-      return import('../views/CounterView.vue')
-    }
+    component: CounterView
   }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes
 })

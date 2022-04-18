@@ -37,7 +37,6 @@ export default {
         {color:'#80C400'},
         {color:'#E94024'},
         {color:'#7D4BC5'}
-        // ' #1C58C8',' #E67399',' #00D9D1',' #80C400',' #E94024',' #7D4BC5'
       ],
       tData: {
         waitTMax: 1200, // 30:00
@@ -49,14 +48,6 @@ export default {
         avgPoint: 10,
         serveP: 15,
         sati: 5,
-      },
-      targetObj: {
-        waitT: 435,
-        workT: 0,
-        breakT: 60,
-        avgPoint: 7,
-        serveP: 11,
-        sati: 3,
       },
       dataSet: [],
       width: 350,
@@ -73,32 +64,14 @@ export default {
     }
   },
   mounted() {
-
-
     this.dataGen();
-    this.draw();
-    
+    this.draw();    
   },
   watch: {
-
     obj: function() {
-
-      this.targetObj = {
-        waitT: this.obj.waitT,     // 07:00
-        workT: this.obj.workT,     // 08:30
-        breakT: this.obj.breakT,     // 01:00
-        avgPoint: this.obj.avgPoint,
-        serveP: this.obj.serveP,
-        sati: this.obj.sati,
-      }
-
       this.dataGen();
-      this.draw();
-
-      // console.log(this.targetObj)
-      
-    }
-    
+      this.draw();      
+    }    
   },
   computed: {
     graphicHeight() {
@@ -108,13 +81,13 @@ export default {
   methods: {
 
     dataGen() {
-      this.dataSet = [
-          (this.tData.waitTMax-this.targetObj.waitT)/(this.tData.waitTMax-this.tData.waitTMin),
-          (this.tData.workTMax-this.targetObj.workT)/(this.tData.workTMax-this.tData.workTMin),
-          (this.tData.breakTMax-this.targetObj.breakT)/(this.tData.breakTMax-this.tData.breakTMin),
-          (this.targetObj.avgPoint/this.tData.avgPoint),
-          (this.targetObj.serveP/this.tData.serveP),
-          (this.targetObj.sati/this.tData.sati),
+      this.dataSet = [          
+          (this.tData.waitTMax-this.obj.waitT)/(this.tData.waitTMax-this.tData.waitTMin),
+          (this.tData.workTMax-this.obj.workT)/(this.tData.workTMax-this.tData.workTMin),
+          (this.tData.breakTMax-this.obj.breakT)/(this.tData.breakTMax-this.tData.breakTMin),
+          (this.obj.avgPoint/this.tData.avgPoint),
+          (this.obj.serveP/this.tData.serveP),
+          (this.obj.sati/this.tData.sati),
       ]
     },
 
@@ -164,13 +137,12 @@ export default {
                 let sec = Math.floor((minDotSec - min)*60)
                 return min.toString().padStart(2,'0') + ':' + sec.toString().padStart(2,'0')
             }
-            if(i==0) { return time(that.targetObj.waitT) }
-            else if(i==1) { return time(that.targetObj.workT) }
-            else if(i==2) { return time(that.targetObj.breakT) }
-            else if(i==3) { return that.targetObj.avgPoint }
-            else if(i==4) { return that.targetObj.serveP }
-            else if(i==5) { return that.targetObj.sati }
-            // return targetObj.waitT
+            if(i==0) { return time(that.obj.waitT) }
+            else if(i==1) { return time(that.obj.workT) }
+            else if(i==2) { return time(that.obj.breakT) }
+            else if(i==3) { return that.obj.avgPoint }
+            else if(i==4) { return that.obj.serveP }
+            else if(i==5) { return that.obj.sati }
         })
     },
 

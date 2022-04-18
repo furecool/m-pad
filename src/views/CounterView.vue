@@ -11,14 +11,14 @@
           <div class="scroll">
             <div class="card" v-for="card in info" :key="card.id" @click="sendCurrCard(card)">
               <div class="row-1">
-                <div class="number" :class="{'inactive-number': !card.櫃員姓名}">{{card.服務櫃號}}</div>
-                <div class="name">{{card.櫃員姓名}}</div>
-                <div class="sign-in">{{card.系統登入時間}}</div>
+                <div class="number" :class="{'inactive-number': !card.counterName}">{{card.counterNum}}</div>
+                <div class="name">{{card.counterName}}</div>
+                <div class="sign-in">{{card.signIn}}</div>
               </div>
-              <div class="serve-t" v-if="card.可服務群組" :class="{'warn': card.已服務時長>=420}">{{servMin(card)}} : {{servSec(card)}}</div>
+              <div class="serve-t" v-if="card.serveGroup" :class="{'warn': card.workT>=420}">{{servMin(card)}} : {{servSec(card)}}</div>
               <div class="card-bar">
-                <div class="serve-g" v-if="card.可服務群組">{{card.可服務群組}}</div>
-                <div class="status" :class="{'inactive-status': !card.櫃員姓名}">{{card.服務狀態}}</div>
+                <div class="serve-g" v-if="card.serveGroup">{{card.serveGroup}}</div>
+                <div class="status" :class="{'inactive-status': !card.counterName}">{{card.status}}</div>
               </div>
             </div>
           </div>          
@@ -45,16 +45,16 @@
                 <div>時間</div>
               </div>
               <div class="service-col">
-                <div>{{currentCard.服務櫃號}}</div>
-                <div>{{currentCard.櫃員員編}}</div>
-                <div>{{currentCard.櫃員姓名}}</div>
-                <div v-if="currentCard.櫃員員編">{{servMin(currentCard)}} : {{servSec(currentCard)}}</div>
-              </div>              
+                <div>{{currentCard.counterNum}}</div>
+                <div>{{currentCard.counterId}}</div>
+                <div>{{currentCard.counterName}}</div>
+                <div v-if="currentCard.counterId">{{servMin(currentCard)}} : {{servSec(currentCard)}}</div>
+              </div>
             </div>
 
             <div class="chart">
               <keep-alive>
-                <component :is="currentService" :obj = obj></component> 
+                <component :is="currentService" :obj = currentCard></component>
               </keep-alive>                          
             </div>
 
@@ -80,150 +80,122 @@ export default {
   },
   data() {
     return {
-      obj: {
-        waitT: 435,
-        workT: 0,
-        breakT: 60,
-        avgPoint: 7,
-        serveP: 11,
-        sati: 3,
-      },
       currentService: "ServiceTarget",
-      currentCard: {
-            "服務櫃號":"1",
-            "櫃員姓名":"陳蘭麗",
-            "系統登入時間":"08:59",
-            "可服務群組":"VR-服",
-            "服務狀態":"服務中",
-            "已服務時長": 0,
-            "櫃員員編":"134859",
-            "平均等待時間":435,
-            "平均暫停時間":60,
-            "已服務人數":11,
-            "客戶滿意度":3,
-            "綜合指標數值":7
-        },
+      currentCard: {},
       info:[
         {
-            "服務櫃號":"1",
-            "櫃員姓名":"陳蘭麗",
-            "系統登入時間":"08:59",
-            "可服務群組":"VR-服",
-            "服務狀態":"等待",
-            "已服務時長": 0,
-            "櫃員員編":"134859",
-            "平均等待時間":435, // "07:15"
-            "平均暫停時間":60, // "01:00"
-            "已服務人數":11,
-            "客戶滿意度":3,
-            "綜合指標數值":7
+            "counterNum":"1",
+            "counterName":"陳蘭麗",
+            "signIn":"08:59",
+            "serveGroup":"VR-服",
+            "status":"等待",
+            "workT": 0,
+            "counterId":"134859",
+            "waitT":435, // "07:15"
+            "breakT":60, // "01:00"
+            "serveP":11,
+            "sati":3,
+            "avgPoint":7
         },
         {
-            "服務櫃號":"2",
-            "櫃員姓名":"湯美茱",
-            "系統登入時間":"08:48",
-            "可服務群組":"VR-服",
-            "服務狀態":"暫停",
-            "已服務時長":408,
-            "櫃員員編":"134859",
-            "平均等待時間":635, // "10:35"
-            "平均暫停時間":135, // "02:15"
-            "已服務人數":4,
-            "客戶滿意度":2,
-            "綜合指標數值":5
+            "counterNum":"2",
+            "counterName":"湯美茱",
+            "signIn":"08:48",
+            "serveGroup":"VR-服",
+            "status":"暫停",
+            "workT":408,
+            "counterId":"135637",
+            "waitT":635, // "10:35"
+            "breakT":135, // "02:15"
+            "serveP":4,
+            "sati":2,
+            "avgPoint":5
         },
         {
-            "服務櫃號":"3",
-            "櫃員姓名":"李千英",
-            "系統登入時間":"08:59",
-            "可服務群組":"VR-服",
-            "服務狀態":"服務中",
-            "已服務時長":479,
-            "櫃員員編":"134859",
-            "平均等待時間":390, // "06:30"
-            "平均暫停時間":195, // "03:15"
-            "已服務人數":10,
-            "客戶滿意度":4,
-            "綜合指標數值":7
+            "counterNum":"3",
+            "counterName":"李千英",
+            "signIn":"08:59",
+            "serveGroup":"VR-服",
+            "status":"服務中",
+            "workT":479,
+            "counterId":"139890",
+            "waitT":390, // "06:30"
+            "breakT":195, // "03:15"
+            "serveP":10,
+            "sati":4,
+            "avgPoint":7
         },
         {
-            "服務櫃號":"4",
-            "櫃員姓名":"劉力皇",
-            "系統登入時間":"08:48",
-            "可服務群組":"VR-服",
-            "服務狀態":"服務中",
-            "已服務時長":1475,
-            "櫃員員編":"134859",
-            "平均等待時間":640, // "10:40"
-            "平均暫停時間":150, // "02:30"
-            "已服務人數":7,
-            "客戶滿意度":5,
-            "綜合指標數值":6
+            "counterNum":"4",
+            "counterName":"劉力皇",
+            "signIn":"08:48",
+            "serveGroup":"VR-服",
+            "status":"服務中",
+            "workT":1475,
+            "counterId":"135787",
+            "waitT":640, // "10:40"
+            "breakT":150, // "02:30"
+            "serveP":7,
+            "sati":5,
+            "avgPoint":6
         },
         {
-            "服務櫃號":"5",
-            "櫃員姓名":"",
-            "系統登入時間":"",
-            "可服務群組":"",
-            "服務狀態":"離線中",
-            "已服務時長":"",
-            "櫃員員編":"",
-            "平均等待時間":"",
-            "平均暫停時間":"",
-            "已服務人數":"",
-            "客戶滿意度":"",
-            "綜合指標數值":""
+            "counterNum":"5",
+            "counterName":"",
+            "signIn":"",
+            "serveGroup":"",
+            "status":"離線中",
+            "workT":"",
+            "counterId":"",
+            "waitT":"",
+            "breakT":"",
+            "serveP":"",
+            "sati":"",
+            "avgPoint":""
         },
         {
-            "服務櫃號":"6",
-            "櫃員姓名":"",
-            "系統登入時間":"",
-            "可服務群組":"",
-            "服務狀態":"離線中",
-            "已服務時長":"",
-            "櫃員員編":"",
-            "平均等待時間":"",
-            "平均暫停時間":"",
-            "已服務人數":"",
-            "客戶滿意度":"",
-            "綜合指標數值":""
+            "counterNum":"6",
+            "counterName":"",
+            "signIn":"",
+            "serveGroup":"",
+            "status":"離線中",
+            "workT":"",
+            "counterId":"",
+            "waitT":"",
+            "breakT":"",
+            "serveP":"",
+            "sati":"",
+            "avgPoint":""
         },
         {
-            "服務櫃號":"7",
-            "櫃員姓名":"",
-            "系統登入時間":"",
-            "可服務群組":"",
-            "服務狀態":"離線中",
-            "已服務時長":"",
-            "櫃員員編":"",
-            "平均等待時間":"",
-            "平均暫停時間":"",
-            "已服務人數":"",
-            "客戶滿意度":"",
-            "綜合指標數值":""
+            "counterNum":"7",
+            "counterName":"",
+            "signIn":"",
+            "serveGroup":"",
+            "status":"離線中",
+            "workT":"",
+            "counterId":"",
+            "waitT":"",
+            "breakT":"",
+            "serveP":"",
+            "sati":"",
+            "avgPoint":""
         },
       ],
     }
   },
+  mounted() {
+    this.currentCard = this.info[0]
+  },
   methods: {
     sendCurrCard(card) {
-      if(card.櫃員姓名) {
+      if(card.counterName) {
         this.currentCard = card
-        this.obj = {
-          counterNo: card.服務櫃號,
-          name: card.櫃員姓名,
-          waitT: card.平均等待時間,
-          workT: card.已服務時長,
-          breakT: card.平均暫停時間,
-          avgPoint: card.綜合指標數值,
-          serveP: card.已服務人數,
-          sati: card.客戶滿意度,
-        }
       }      
     },
     servMin(card) {
-      let min = Math.floor(card.已服務時長 /60)
-      window.sec = Math.floor(((card.已服務時長 /60) - min)*60)
+      let min = Math.floor(card.workT /60)
+      window.sec = Math.floor(((card.workT /60) - min)*60)
       return min.toString().padStart(2,'0');
     },
     servSec() {

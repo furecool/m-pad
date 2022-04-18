@@ -1,8 +1,6 @@
 <template>
   <div class="service-target">
-
-    <div class="radarChart"></div>
-
+      <div class="radarChart"></div>  
   </div>
 </template>
 
@@ -10,7 +8,7 @@
 export default {
   name: 'ServiceTarget',
   props: {
-    obj: {}
+    obj: {},
   },
   data() {
     return {
@@ -25,15 +23,6 @@ export default {
         avgPoint: 10,
         serveP: 15,
         sati: 5,
-      },
-
-      target: {
-        waitT: 435,
-        workT: 0,
-        breakT: 60,
-        avgPoint: 7,
-        serveP: 11,
-        sati: 3,
       },
 
       data: [],
@@ -59,30 +48,11 @@ export default {
       },
     }
   },
-  mounted() {
-
-    this.dataGen();
-    this.RadarChart(".radarChart", this.data);    
-  
-  },
   watch: {
 
     obj: function() {
-      
-      
-      this.target = {
-        waitT: this.obj.waitT,     // 07:00
-        workT: this.obj.workT,     // 08:30
-        breakT: this.obj.breakT,     // 01:00
-        avgPoint: this.obj.avgPoint,
-        serveP: this.obj.serveP,
-        sati: this.obj.sati,
-      }
       this.dataGen();
       this.RadarChart(".radarChart", this.data);
-
-      // console.log(this.target)
-      // console.log(this.data)
     }
     
   },
@@ -119,12 +89,12 @@ export default {
           },
           // 目標對象
           {
-            "等待時間":this.tData.waitTMax-this.target.waitT,
-            "作業時間":this.tData.workTMax-this.target.workT,
-            "暫停時間":this.tData.breakTMax-this.target.breakT,
-            "綜合指標":this.target.avgPoint,
-            "服務人數":this.target.serveP,
-            "滿意度":this.target.sati,
+            "等待時間":this.tData.waitTMax-this.obj.waitT,
+            "作業時間":this.tData.workTMax-this.obj.workT,
+            "暫停時間":this.tData.breakTMax-this.obj.breakT,
+            "綜合指標":this.obj.avgPoint,
+            "服務人數":this.obj.serveP,
+            "滿意度":this.obj.sati,
           },
       ]
     },
