@@ -13,11 +13,11 @@
           <div class="scroll">
             <div class="card" v-for="card in infoCate(item)" :key="card.id">
               <div class="card-bar"></div>
-              <div class="card-cate" v-if="card.客戶類別 == '一般'"></div>
-              <div class="card-cate" v-if="card.客戶類別 == '預填'">S</div>
-              <div class="card-cate" v-if="card.客戶類別 == 'VIP'" style="color: rgb(47, 196, 255);">V</div>
-              <div class="card-number">{{card.叫號號碼}}</div>
-              <div class="card-time">{{waitMin(card)}} : {{waitSec(card)}}</div>
+              <div class="card-cate" v-if="card.clientCate == '一般'"></div>
+              <div class="card-cate" v-if="card.clientCate == '預填'">S</div>
+              <div class="card-cate" v-if="card.clientCate == 'VIP'" style="color: rgb(47, 196, 255);">V</div>
+              <div class="card-number">{{card.callNum}}</div>
+              <div class="card-time"><p :style="waitTColor(card)">{{waitMin(card)}} : {{waitSec(card)}}</p></div>
             </div>
           </div>
           
@@ -48,116 +48,47 @@ export default {
   },
   data() {
     return {
+      getTime: 500,
+      warnTime: 360,
       cate: [
         "一般收付",
         "服務台",
         "外匯"
       ],
-      info: [
-        {
-            "叫號號碼":"1005",
-            "客戶類別":"預填",
-            "服務類別":"一般收付",
-            "等候時間":168,
-            "取號日期":"2018.09.19",
-            "取號時間":"09:26:52..."
-        },
-        {
-            "叫號號碼":"1310",
-            "客戶類別":"一般",
-            "服務類別":"一般收付",
-            "等候時間":336,
-            "取號日期":"2018.09.19",
-            "取號時間":"09:26:52..."
-        },
-        {
-            "叫號號碼":"1310",
-            "客戶類別":"一般",
-            "服務類別":"一般收付",
-            "等候時間":336,
-            "取號日期":"2018.09.19",
-            "取號時間":"09:26:52..."
-        },
-        {
-            "叫號號碼":"1310",
-            "客戶類別":"一般",
-            "服務類別":"一般收付",
-            "等候時間":336,
-            "取號日期":"2018.09.19",
-            "取號時間":"09:26:52..."
-        },
-        {
-            "叫號號碼":"1310",
-            "客戶類別":"一般",
-            "服務類別":"一般收付",
-            "等候時間":336,
-            "取號日期":"2018.09.19",
-            "取號時間":"09:26:52..."
-        },
-        {
-            "叫號號碼":"1310",
-            "客戶類別":"一般",
-            "服務類別":"一般收付",
-            "等候時間":336,
-            "取號日期":"2018.09.19",
-            "取號時間":"09:26:52..."
-        },
-        {
-            "叫號號碼":"1310",
-            "客戶類別":"一般",
-            "服務類別":"一般收付",
-            "等候時間":336,
-            "取號日期":"2018.09.19",
-            "取號時間":"09:26:52..."
-        },
-        {
-            "叫號號碼":"1310",
-            "客戶類別":"一般",
-            "服務類別":"一般收付",
-            "等候時間":336,
-            "取號日期":"2018.09.19",
-            "取號時間":"09:26:52..."
-        },
-        {
-            "叫號號碼":"6103",
-            "客戶類別":"VIP",
-            "服務類別":"服務台",
-            "等候時間":379,
-            "取號日期":"2018.09.19",
-            "取號時間":"09:26:52..."
-        },
-        {
-            "叫號號碼":"6308",
-            "客戶類別":"一般",
-            "服務類別":"服務台",
-            "等候時間":768,
-            "取號日期":"2018.09.19",
-            "取號時間":"09:26:52..."
-        },
-        {
-            "叫號號碼":"8305",
-            "客戶類別":"一般",
-            "服務類別":"外匯",
-            "等候時間":56,
-            "取號日期":"2018.09.19",
-            "取號時間":"09:26:52..."
-        }
-      ]
+      info: [],
     }
+  },
+  created() {
+    let that = this
+    // let url = 'http://localhost:2211/api/visualdata'
+    let url = '/infoInline.json'
+    // let url = 'Api/api/visualdata'
+    function getInfo() {
+      that.$ajax.get(url)
+      .then(function(res) {
+        that.info = res.data.info
+      })
+      .catch(function(err) { 
+          console.log(err)
+      })
+    }
+    clearInterval(setInterval(getInfo, that.getTime))
+    getInfo()
+    setInterval(getInfo, that.getTime)
   },
   methods: {
     infoCate(item) {
       let arr = []
       this.info.forEach(function(card) {
-        if(card.服務類別 == item) {
+        if(card.serveCate == item) {
           arr.push(card)
         }
       })
       return arr
     },
     waitMin(card) {
-      let min = Math.floor(card.等候時間 /60)
-      window.sec = Math.floor(((card.等候時間 /60) - min)*60)
+      let min = Math.floor(card.waitT /60)
+      window.sec = Math.floor(((card.waitT /60) - min)*60)
       return min.toString().padStart(2,'0');;
     },
     waitSec() {
@@ -168,7 +99,7 @@ export default {
       vm.waitingP = 0
       let color
       this.info.forEach(function(card) {
-        if(card.服務類別 == item) {
+        if(card.serveCate == item) {
           vm.waitingP += 1
         }
       })
@@ -178,6 +109,11 @@ export default {
         color = 'white';
       }
       return "font-weight:bold;color:" + color;
+    },
+    waitTColor(card) {
+      if(card.waitT >= this.warnTime) {
+        return 'color: #d70c18;'
+      }    
     }
   },
 

@@ -54,7 +54,7 @@
 
             <div class="chart">
               <keep-alive>
-                <component :is="currentService" :obj = currentCard></component>
+                <component :is="currentService" :obj = currentCard :tData = tData></component>
               </keep-alive>                          
             </div>
 
@@ -80,112 +80,39 @@ export default {
   },
   data() {
     return {
+      getTime: 500,
       currentService: "ServiceTarget",
       currentCard: {},
-      info:[
-        {
-            "counterNum":"1",
-            "counterName":"陳蘭麗",
-            "signIn":"08:59",
-            "serveGroup":"VR-服",
-            "status":"等待",
-            "workT": 0,
-            "counterId":"134859",
-            "waitT":435, // "07:15"
-            "breakT":60, // "01:00"
-            "serveP":11,
-            "sati":3,
-            "avgPoint":7
-        },
-        {
-            "counterNum":"2",
-            "counterName":"湯美茱",
-            "signIn":"08:48",
-            "serveGroup":"VR-服",
-            "status":"暫停",
-            "workT":408,
-            "counterId":"135637",
-            "waitT":635, // "10:35"
-            "breakT":135, // "02:15"
-            "serveP":4,
-            "sati":2,
-            "avgPoint":5
-        },
-        {
-            "counterNum":"3",
-            "counterName":"李千英",
-            "signIn":"08:59",
-            "serveGroup":"VR-服",
-            "status":"服務中",
-            "workT":479,
-            "counterId":"139890",
-            "waitT":390, // "06:30"
-            "breakT":195, // "03:15"
-            "serveP":10,
-            "sati":4,
-            "avgPoint":7
-        },
-        {
-            "counterNum":"4",
-            "counterName":"劉力皇",
-            "signIn":"08:48",
-            "serveGroup":"VR-服",
-            "status":"服務中",
-            "workT":1475,
-            "counterId":"135787",
-            "waitT":640, // "10:40"
-            "breakT":150, // "02:30"
-            "serveP":7,
-            "sati":5,
-            "avgPoint":6
-        },
-        {
-            "counterNum":"5",
-            "counterName":"",
-            "signIn":"",
-            "serveGroup":"",
-            "status":"離線中",
-            "workT":"",
-            "counterId":"",
-            "waitT":"",
-            "breakT":"",
-            "serveP":"",
-            "sati":"",
-            "avgPoint":""
-        },
-        {
-            "counterNum":"6",
-            "counterName":"",
-            "signIn":"",
-            "serveGroup":"",
-            "status":"離線中",
-            "workT":"",
-            "counterId":"",
-            "waitT":"",
-            "breakT":"",
-            "serveP":"",
-            "sati":"",
-            "avgPoint":""
-        },
-        {
-            "counterNum":"7",
-            "counterName":"",
-            "signIn":"",
-            "serveGroup":"",
-            "status":"離線中",
-            "workT":"",
-            "counterId":"",
-            "waitT":"",
-            "breakT":"",
-            "serveP":"",
-            "sati":"",
-            "avgPoint":""
-        },
-      ],
+      info: [],
+      tData: {},
     }
   },
-  mounted() {
-    this.currentCard = this.info[0]
+  created() {
+    let that = this
+    // let url = 'http://localhost:2211/api/visualdata'
+    let url = '/infoCounter.json'
+    // let url = 'Api/api/visualdata'
+    function getInfo() {
+      that.$ajax.get(url)
+      .then(function(res) {
+        that.info = res.data.info
+        that.tData = res.data.tData
+        // 或在此計算 tData      
+      })
+      .catch(function(err) { 
+          console.log(err)
+      })
+    }
+    clearInterval(setInterval(getInfo, that.getTime))
+    getInfo()
+    setInterval(getInfo, that.getTime)
+  },
+  watch: {
+    info: function() {
+      if(JSON.stringify(this.currentCard) === '{}') {
+        this.currentCard = this.info[0]
+      }
+    },
   },
   methods: {
     sendCurrCard(card) {

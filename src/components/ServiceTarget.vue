@@ -9,24 +9,11 @@ export default {
   name: 'ServiceTarget',
   props: {
     obj: {},
+    tData: {},
   },
   data() {
     return {
-
-      tData: {
-        waitTMax: 1200, // 30:00
-        waitTMin: 0,
-        workTMax: 1800, // 30:00
-        workTMin: 0,
-        breakTMax: 600, // 04:00
-        breakTMin: 0,
-        avgPoint: 10,
-        serveP: 15,
-        sati: 5,
-      },
-
       data: [],
-
       cfg: {
         w: 250,
         h: 250,
@@ -78,7 +65,7 @@ export default {
             "服務人數":this.tData.serveP,
             "滿意度":this.tData.sati,
           },
-          // 參考值
+          // 參考值:　目前設平均數
           {
             "等待時間":(this.tData.waitTMax-this.tData.waitTMin)/2,
             "作業時間":(this.tData.workTMax-this.tData.workTMin)/2,

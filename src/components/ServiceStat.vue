@@ -18,7 +18,8 @@
 export default {
   name: 'ServiceStat',
   props: {
-    obj: {}
+    obj: {},
+    tData: {},
   },
   data() {
     return {
@@ -38,17 +39,6 @@ export default {
         {color:'#E94024'},
         {color:'#7D4BC5'}
       ],
-      tData: {
-        waitTMax: 1200, // 30:00
-        waitTMin: 0,
-        workTMax: 1800, // 30:00
-        workTMin: 0,
-        breakTMax: 600, // 04:00
-        breakTMin: 0,
-        avgPoint: 10,
-        serveP: 15,
-        sati: 5,
-      },
       dataSet: [],
       width: 350,
       height: 350,
@@ -65,7 +55,7 @@ export default {
   },
   mounted() {
     this.dataGen();
-    this.draw();    
+    this.draw();
   },
   watch: {
     obj: function() {

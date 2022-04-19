@@ -1,0 +1,113 @@
+{
+    "tData": {
+        "waitTMax": 1200,
+        "waitTMin": 0,
+        "workTMax": 1800,
+        "workTMin": 0,
+        "breakTMax": 600,
+        "breakTMin": 0,
+        "avgPoint": 10,
+        "serveP": 15,
+        "sati": 5
+    },
+    "info": [
+        {
+            "counterNum":"1",
+            "counterName":"陳蘭麗",
+            "signIn":"08:59",
+            "serveGroup":"VR-服",
+            "status":"等待",
+            "workT": 0,
+            "counterId":"134859",
+            "waitT":435,
+            "breakT":60,
+            "serveP":11,
+            "sati":3,
+            "avgPoint":7
+        },
+        {
+            "counterNum":"2",
+            "counterName":"湯美茱",
+            "signIn":"08:48",
+            "serveGroup":"VR-服",
+            "status":"暫停",
+            "workT":408,
+            "counterId":"135637",
+            "waitT":635,
+            "breakT":135,
+            "serveP":4,
+            "sati":2,
+            "avgPoint":5
+        },
+        {
+            "counterNum":"3",
+            "counterName":"李千英",
+            "signIn":"08:59",
+            "serveGroup":"VR-服",
+            "status":"服務中",
+            "workT":479,
+            "counterId":"139890",
+            "waitT":390,
+            "breakT":195,
+            "serveP":10,
+            "sati":4,
+            "avgPoint":7
+        },
+        {
+            "counterNum":"4",
+            "counterName":"劉力皇",
+            "signIn":"08:48",
+            "serveGroup":"VR-服",
+            "status":"服務中",
+            "workT":1475,
+            "counterId":"135787",
+            "waitT":640,
+            "breakT":150,
+            "serveP":7,
+            "sati":5,
+            "avgPoint":6
+        },
+        {
+            "counterNum":"5",
+            "counterName":"",
+            "signIn":"",
+            "serveGroup":"",
+            "status":"離線中",
+            "workT":"",
+            "counterId":"",
+            "waitT":"",
+            "breakT":"",
+            "serveP":"",
+            "sati":"",
+            "avgPoint":""
+        },
+        {
+            "counterNum":"6",
+            "counterName":"",
+            "signIn":"",
+            "serveGroup":"",
+            "status":"離線中",
+            "workT":"",
+            "counterId":"",
+            "waitT":"",
+            "breakT":"",
+            "serveP":"",
+            "sati":"",
+            "avgPoint":""
+        },
+        {
+            "counterNum":"7",
+            "counterName":"",
+            "signIn":"",
+            "serveGroup":"",
+            "status":"離線中",
+            "workT":"",
+            "counterId":"",
+            "waitT":"",
+            "breakT":"",
+            "serveP":"",
+            "sati":"",
+            "avgPoint":""
+        }
+    ]
+}
