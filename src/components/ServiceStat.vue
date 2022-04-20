@@ -1,16 +1,11 @@
 <template>
   <div class="service-stat">
-
     <div class="rectWrapper">
-
-      <div class="rectChart"></div>    
-
+      <div class="rectChart"></div>
       <ul class="label-list">
         <li v-for="(li, index) in labelList" :key="li.id"><i class="fa-solid fa-square" :style="labelColor[index]"></i> {{li}}</li>
-      </ul>  
-
-    </div>      
-
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -178,15 +173,16 @@ export default {
     /* flex-direction: column; */
     align-items: center;
     justify-content: center;
-    width: 100%;
-    padding: 0;
+    width: 80%;
+    padding: 0 0 0 110px;
   }
 
   .rectWrapper {
     display: flex;
     align-items: center;
-    width: 85%;
+    width: 100%;
     background: #fff;
+    padding: 30px 0;
   }
 
   .rectChart {

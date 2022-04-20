@@ -279,7 +279,7 @@ export default {
                       return min.toString().padStart(2,'0') + ':' + sec.toString().padStart(2,'0')
                     } else {
                       return d.value;
-                    }                    
+                    }
                   })
                   .transition().duration(200)
                   .style('opacity', 1);
@@ -357,13 +357,12 @@ export default {
 }
 </script>
 
-<style>
-
-    
+<style>    
 
     .service-target {
       position: relative;
-      padding: 0 30px;
+      padding: 0 0 0 110px;
+      width: 80%;
     }
 
     .radarChart {
