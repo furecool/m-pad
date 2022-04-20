@@ -18,7 +18,8 @@
               <div class="serve-t" v-if="card.serveGroup" :class="{'warn': card.workT>=420}">{{servMin(card)}} : {{servSec(card)}}</div>
               <div class="card-bar">
                 <div class="serve-g" v-if="card.serveGroup">{{card.serveGroup}}</div>
-                <div class="status" :class="{'inactive-status': !card.counterName}">{{card.status}}</div>
+                <div class="status" v-if="card.status">{{card.status}}</div>
+                <div class="inactive-status" v-if="!card.status">離線中</div>
               </div>
             </div>
           </div>          
@@ -85,6 +86,17 @@ export default {
       currentCard: {},
       info: [],
       tData: {},
+      // tData: {
+      //   "waitTMax": 1200,
+      //   "waitTMin": 0,
+      //   "workTMax": 1800,
+      //   "workTMin": 0,
+      //   "breakTMax": 600,
+      //   "breakTMin": 0,
+      //   "serveP": 15,
+      //   "avgPoint": 10,
+      //   "sati": 5
+      // },
     }
   },
   created() {
@@ -97,15 +109,41 @@ export default {
       .then(function(res) {
         that.info = res.data.info
         that.tData = res.data.tData
-        // 或在此計算 tData      
+        // 或在此計算 tData
+        that.tData.waitTMax = Math.max.apply(null, that.info.map(function (o) {
+          return o.waitT;
+          }))
+        that.tData.waitTMin = Math.min.apply(null, that.info.map(function (o) {
+          return o.waitT;
+          }))
+        that.tData.breakTMax = Math.max.apply(null, that.info.map(function (o) {
+          return o.breakT;
+          }))
+        that.tData.breakTMin = Math.min.apply(null, that.info.map(function (o) {
+          return o.breakT;
+          }))
+        that.tData.workTMax = Math.max.apply(null, that.info.map(function (o) {
+          return o.workT;
+          }))
+        that.tData.workTMin = Math.min.apply(null, that.info.map(function (o) {
+          return o.workT;
+          }))        
+        that.tData.serveP = Math.max.apply(null, that.info.map(function (o) {
+          return o.serveP;
+          }))
+        // console.log('waitT: ' + that.tData.waitTMax, that.tData.waitTMin)
+        // console.log('breakT: ' + that.tData.breakTMax, that.tData.breakTMin)
+        // console.log('workT: ' + that.tData.workTMax, that.tData.workTMin)
+        // console.log('serveP: ' + that.tData.serveP)
+
       })
       .catch(function(err) { 
           console.log(err)
       })
     }
-    clearInterval(setInterval(getInfo, that.getTime))
+    // clearInterval(setInterval(getInfo, that.getTime))
     getInfo()
-    setInterval(getInfo, that.getTime)
+    // setInterval(getInfo, that.getTime)
   },
   watch: {
     info: function() {

@@ -65,7 +65,7 @@ export default {
             "服務人數":this.tData.serveP,
             "滿意度":this.tData.sati,
           },
-          // 參考值:　目前設平均數
+          // 參考值:　目前設 Max/2
           {
             "等待時間":(this.tData.waitTMax-this.tData.waitTMin)/2,
             "作業時間":(this.tData.workTMax-this.tData.workTMin)/2,
