@@ -102,13 +102,13 @@ export default {
   created() {
     let that = this
     // let url = 'http://localhost:2211/api/visualdata'
-    let url = '/infoCounter.json'
+    let url = '/info.json'
     // let url = 'Api/api/visualdata'
     function getInfo() {
       that.$ajax.get(url)
       .then(function(res) {
-        that.info = res.data.info
-        that.tData = res.data.tData
+        that.info = res.data.counter
+        // that.tData = res.data.tData
         // 或在此計算 tData
         that.tData.waitTMax = Math.max.apply(null, that.info.map(function (o) {
           return o.waitT;
@@ -127,10 +127,12 @@ export default {
           }))
         that.tData.workTMin = Math.min.apply(null, that.info.map(function (o) {
           return o.workT;
-          }))        
+          }))
         that.tData.serveP = Math.max.apply(null, that.info.map(function (o) {
           return o.serveP;
           }))
+        that.tData.avgPoint = 10;
+        that.tData.sati = 5;
         // console.log('waitT: ' + that.tData.waitTMax, that.tData.waitTMin)
         // console.log('breakT: ' + that.tData.breakTMax, that.tData.breakTMin)
         // console.log('workT: ' + that.tData.workTMax, that.tData.workTMin)
@@ -178,11 +180,13 @@ export default {
   }
 
   .counter .content {
-    padding: 20px 0;
-    margin: 0 auto;
+    padding: 15px 0 0 0;
     background-color: rgba(0, 0, 0, .15);
-    width: 90%;
-    height: 73vh;
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    bottom: 60px;
+    top: 105px;
   }
 
   /* ----------------------- card ----------------------- */
@@ -279,7 +283,6 @@ export default {
 
   .service-chart {
     width: 95%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -322,10 +325,6 @@ export default {
     justify-content: space-around;
     font-weight: bold;
     font-size: 1.3rem;
-  }
-
-  .service-col div {
-    height: 20px;
   }
 
   .chart {

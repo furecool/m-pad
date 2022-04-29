@@ -61,12 +61,12 @@ export default {
   created() {
     let that = this
     // let url = 'http://localhost:2211/api/visualdata'
-    let url = '/infoInline.json'
+    let url = '/info.json'
     // let url = 'Api/api/visualdata'
     function getInfo() {
       that.$ajax.get(url)
       .then(function(res) {
-        that.info = res.data.info
+        that.info = res.data.inline
       })
       .catch(function(err) { 
           console.log(err)

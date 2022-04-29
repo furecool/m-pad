@@ -1,356 +1,396 @@
 {
-    "info": [
+    "inline": [
         {
             "callNum":"1005",
             "clientCate":"預填",
             "serveCate":"一般收付",
-            "waitT":168,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":168
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"6103",
             "clientCate":"VIP",
             "serveCate":"服務台",
-            "waitT":379,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":379
         },
         {
             "callNum":"6308",
             "clientCate":"一般",
             "serveCate":"服務台",
-            "waitT":768,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":768
         },
         {
             "callNum":"8305",
             "clientCate":"一般",
             "serveCate":"外匯",
-            "waitT":56,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":56
         },
         {
             "callNum":"1005",
             "clientCate":"預填",
             "serveCate":"一般收付",
-            "waitT":168,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":168
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"6103",
             "clientCate":"VIP",
             "serveCate":"服務台",
-            "waitT":379,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":379
         },
         {
             "callNum":"6308",
             "clientCate":"一般",
             "serveCate":"服務台",
-            "waitT":768,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":768
         },
         {
             "callNum":"8305",
             "clientCate":"一般",
             "serveCate":"外匯",
-            "waitT":56,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":56
         },
         {
             "callNum":"1005",
             "clientCate":"預填",
             "serveCate":"一般收付",
-            "waitT":168,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":168
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"6103",
             "clientCate":"VIP",
             "serveCate":"服務台",
-            "waitT":379,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":379
         },
         {
             "callNum":"6308",
             "clientCate":"一般",
             "serveCate":"服務台",
-            "waitT":768,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":768
         },
         {
             "callNum":"8305",
             "clientCate":"一般",
             "serveCate":"外匯",
-            "waitT":56,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":56
         },
         {
             "callNum":"1005",
             "clientCate":"預填",
             "serveCate":"一般收付",
-            "waitT":168,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":168
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"1310",
             "clientCate":"一般",
             "serveCate":"一般收付",
-            "waitT":336,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":336
         },
         {
             "callNum":"6103",
             "clientCate":"VIP",
             "serveCate":"服務台",
-            "waitT":379,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":379
         },
         {
             "callNum":"6308",
             "clientCate":"一般",
             "serveCate":"服務台",
-            "waitT":768,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":768
         },
         {
             "callNum":"8305",
             "clientCate":"一般",
             "serveCate":"外匯",
-            "waitT":56,
-            "getDate":"2018.09.19",
-            "getTime":"09:26:52..."
+            "waitT":56
+        }
+    ],
+    "counter": [
+        {
+            "counterNum":"1",
+            "counterName":"陳蘭麗",
+            "signIn":"08:59",
+            "serveGroup":"VR-服",
+            "status":"等待",
+            "workT": 0,
+            "counterId":"134859",
+            "waitT":435,
+            "breakT":60,
+            "serveP":11,
+            "sati":3,
+            "avgPoint":7
+        },
+        {
+            "counterNum":"2",
+            "counterName":"湯美茱",
+            "signIn":"08:48",
+            "serveGroup":"VR-外",
+            "status":"暫停",
+            "workT":408,
+            "counterId":"135637",
+            "waitT":635,
+            "breakT":135,
+            "serveP":4,
+            "sati":2,
+            "avgPoint":5
+        },
+        {
+            "counterNum":"3",
+            "counterName":"李千英",
+            "signIn":"08:59",
+            "serveGroup":"外-服",
+            "status":"服務中",
+            "workT":479,
+            "counterId":"139890",
+            "waitT":390,
+            "breakT":195,
+            "serveP":10,
+            "sati":4,
+            "avgPoint":7
+        },
+        {
+            "counterNum":"4",
+            "counterName":"劉力皇",
+            "signIn":"08:48",
+            "serveGroup":"VR-服",
+            "status":"服務中",
+            "workT":1475,
+            "counterId":"135787",
+            "waitT":640,
+            "breakT":150,
+            "serveP":7,
+            "sati":5,
+            "avgPoint":6
+        },
+        {
+            "counterNum":"5",
+            "counterName":"張三豐",
+            "signIn":"08:59",
+            "serveGroup":"VR-服",
+            "status":"等待",
+            "workT": 660,
+            "counterId":"134845",
+            "waitT":875,
+            "breakT":120,
+            "serveP":11,
+            "sati":3,
+            "avgPoint":7
+        },
+        {
+            "counterNum":"6",
+            "counterName":"段正淳",
+            "signIn":"08:59",
+            "serveGroup":"VR-服",
+            "status":"等待",
+            "workT": 600,
+            "counterId":"134727",
+            "waitT":575,
+            "breakT":150,
+            "serveP":8,
+            "sati":2,
+            "avgPoint":6
+        },
+        {
+            "counterNum":"7",
+            "counterName":"",
+            "signIn":"",
+            "serveGroup":"",
+            "status":"",
+            "workT":"",
+            "counterId":"",
+            "waitT":"",
+            "breakT":"",
+            "serveP":"",
+            "sati":"",
+            "avgPoint":""
+        },
+        {
+            "counterNum":"8",
+            "counterName":"",
+            "signIn":"",
+            "serveGroup":"",
+            "status":"",
+            "workT":"",
+            "counterId":"",
+            "waitT":"",
+            "breakT":"",
+            "serveP":"",
+            "sati":"",
+            "avgPoint":""
+        },
+        {
+            "counterNum":"9",
+            "counterName":"",
+            "signIn":"",
+            "serveGroup":"",
+            "status":"",
+            "workT":"",
+            "counterId":"",
+            "waitT":"",
+            "breakT":"",
+            "serveP":"",
+            "sati":"",
+            "avgPoint":""
         }
     ]
 }
