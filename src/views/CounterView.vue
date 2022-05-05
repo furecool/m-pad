@@ -1,28 +1,43 @@
 <template>
   <div class="counter">
 
-    <!-- <div class="wrapper"> -->
-
       <div class="content">
 
         <!-- ================ cards ================ -->
 
-        <div class="cards">
-          <div class="scroll">
-            <div class="card" v-for="card in info" :key="card.id" @click="sendCurrCard(card)">
-              <div class="row-1">
-                <div class="number" :class="{'inactive-number': !card.counterName}">{{card.counterNum}}</div>
-                <div class="name">{{card.counterName}}</div>
-                <div class="sign-in">{{card.signIn}}</div>
+        <div class="cards-box"> 
+          <div class="cards">
+            <div class="scroll">
+
+              <div v-for="card in info" :key="card.id">
+
+                  <div class="card" v-if="card.counterId || offLine == true" @click="sendCurrCard(card)">
+                    
+                      <div class="row-1">
+                        <div class="number" :class="{'inactive-number': !card.counterName}">{{card.counterNum}}</div>
+                        <div class="name">{{card.counterName}}</div>
+                        <div class="sign-in">{{card.signIn}}</div>
+                      </div>
+                      <div class="serve-t" v-if="card.serveGroup" :class="{'warn': card.workT>=420}">{{servMin(card)}} : {{servSec(card)}}</div>
+                      <div class="card-bar">
+                        <div class="serve-g" v-if="card.serveGroup">{{card.serveGroup}}</div>
+                        <div class="status" v-if="card.status">{{card.status}}</div>
+                        <div class="inactive-status" v-if="!card.counterId">離線中</div>
+                      </div>
+                    
+                  </div>
+
               </div>
-              <div class="serve-t" v-if="card.serveGroup" :class="{'warn': card.workT>=420}">{{servMin(card)}} : {{servSec(card)}}</div>
-              <div class="card-bar">
-                <div class="serve-g" v-if="card.serveGroup">{{card.serveGroup}}</div>
-                <div class="status" v-if="card.status">{{card.status}}</div>
-                <div class="inactive-status" v-if="!card.status">離線中</div>
-              </div>
+
             </div>
-          </div>          
+          </div>
+          <div class="offline-btn" @click="toggleOffLine">
+            <!-- <i v-if="offLine" @click="toggleOffLine" class="fas fa-toggle-off"></i>
+            <i v-if="!offLine" @click="toggleOffLine" class="fas fa-toggle-on"></i> -->
+            <i v-if="offLine" class="fas fa-eye"></i>
+            <i v-if="!offLine" class="fas fa-eye-slash"></i>
+            <div>顯示離線</div>
+          </div> 
         </div>
 
         <!-- ================ service-chart ================ -->
@@ -65,8 +80,6 @@
 
       </div>
 
-    <!-- </div> -->
-
   </div>
 </template>
 <script>
@@ -81,6 +94,7 @@ export default {
   },
   data() {
     return {
+      offLine: true,
       getTime: 500,
       currentService: "ServiceTarget",
       currentCard: {},
@@ -168,6 +182,9 @@ export default {
     servSec() {
       return  window.sec.toString().padStart(2,'0');
     },
+    toggleOffLine() {
+      this.offLine = !this.offLine
+    },
   },
 
 }
@@ -191,11 +208,23 @@ export default {
 
   /* ----------------------- card ----------------------- */
 
+  .cards-box {
+    display: flex;
+  }
+  .offline-btn {
+    font-size: 16px;
+    font-weight: bold;
+    flex: 1;
+    margin: 10px 20px;
+  }
+  .offline-btn i {
+    font-size: 24px;
+  }
   .counter .cards {
+    flex: 18;
     display: flex;
     overflow-x: auto;
-    width: 95%;
-    margin: 0 auto;
+    margin-left: 20px;
   }
   .counter .cards::-webkit-scrollbar {
     display: none;
@@ -209,7 +238,7 @@ export default {
     height: 80px;
     width: 150px;
     background-color: #fff;
-    margin: 5px;
+    margin-right: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
