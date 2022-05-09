@@ -361,13 +361,6 @@ export default {
 
     .service-target {
       position: relative;
-      padding: 0 0 0 110px;
-      width: 80%;
-      /* position: absolute;
-      top: 10px;
-      bottom: 1opx;
-      left: 10px;
-      right: 10px; */
     }
 
     .radarChart {

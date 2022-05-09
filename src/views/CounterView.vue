@@ -5,7 +5,7 @@
 
         <!-- ================ cards ================ -->
 
-        <div class="cards-box"> 
+        <div class="cards-box">
           <div class="cards">
             <div class="scroll">
 
@@ -32,11 +32,8 @@
             </div>
           </div>
           <div class="offline-btn" @click="toggleOffLine">
-            <!-- <i v-if="offLine" @click="toggleOffLine" class="fas fa-toggle-off"></i>
-            <i v-if="!offLine" @click="toggleOffLine" class="fas fa-toggle-on"></i> -->
-            <i v-if="offLine" class="fas fa-eye"></i>
-            <i v-if="!offLine" class="fas fa-eye-slash"></i>
-            <div>顯示離線</div>
+            <i v-if="offLine" class="fas fa-toggle-off"></i>
+            <i v-if="!offLine" class="fas fa-toggle-on"></i>
           </div> 
         </div>
 
@@ -147,10 +144,6 @@ export default {
           }))
         that.tData.avgPoint = 10;
         that.tData.sati = 5;
-        // console.log('waitT: ' + that.tData.waitTMax, that.tData.waitTMin)
-        // console.log('breakT: ' + that.tData.breakTMax, that.tData.breakTMin)
-        // console.log('workT: ' + that.tData.workTMax, that.tData.workTMin)
-        // console.log('serveP: ' + that.tData.serveP)
 
       })
       .catch(function(err) { 
@@ -197,8 +190,8 @@ export default {
   }
 
   .counter .content {
-    padding: 15px 0 0 0;
-    background-color: rgba(0, 0, 0, .15);
+    padding: 10px 0 0 0;
+    /* background-color: rgba(0, 0, 0, .15); */
     position: absolute;
     left: 40px;
     right: 40px;
@@ -208,23 +201,23 @@ export default {
 
   /* ----------------------- card ----------------------- */
 
-  .cards-box {
-    display: flex;
-  }
   .offline-btn {
+    display: flex;
+    justify-content: flex-end;
     font-size: 16px;
     font-weight: bold;
     flex: 1;
-    margin: 10px 20px;
+    margin: 5px 10px 0;
   }
   .offline-btn i {
     font-size: 24px;
   }
   .counter .cards {
-    flex: 18;
+    flex: 1;
     display: flex;
     overflow-x: auto;
-    margin-left: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
   .counter .cards::-webkit-scrollbar {
     display: none;
@@ -238,12 +231,15 @@ export default {
     height: 80px;
     width: 150px;
     background-color: #fff;
-    margin-right: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     position: relative;
+    margin-left: 10px;
+  }
+  .counter .scroll > div:first-child .card {
+    margin-left: 0px;
   }
 
   .counter .row-1 {
@@ -262,9 +258,6 @@ export default {
   .counter .number:before {
     content:"";
     display: block;
-    /* background: #e2565d; */
-    /* background: #f7e648; */
-    /* background: #3657c2; */
     background: #d70c18;
     width: 25px;
     height: 25px;
@@ -298,7 +291,8 @@ export default {
     display: flex;
     justify-content: space-around;
     width: 100%;
-    background-color: rgb(226, 226, 226);
+    background-color: #b1b1b1;
+    /* background-color: rgb(226, 226, 226); */
   }
   /* .counter .serve-g {} */
   .counter .status {
@@ -311,11 +305,10 @@ export default {
   /* ----------------------- service-chart ----------------------- */
 
   .service-chart {
-    width: 95%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px auto;
+    margin: 0px 10px;
   }
 
   .service-chart-nav {
@@ -326,23 +319,18 @@ export default {
     letter-spacing: 2px;
     color: #fff;
     text-decoration: none;
+    margin-bottom: 20px;
   }
 
   .service-chart-content {
     width: 100%;
-    /* height: 100%; */
     display: flex;
-    justify-content: space-between;
-    /* flex-direction: column; */
-    padding: 15px 0;
-    margin: 0px 0;
   }
 
   .service {
     width: 160px;
     display: flex;
     align-items: center;
-    margin: 20px auto;
     height: 150px;
   }
 
@@ -358,12 +346,8 @@ export default {
 
   .chart {
     width: 100%;
+    margin-left: 20px;
   }
-
-  .chart img {
-    width: 100%;
-  }
-  
 
   .counter .three-d-btn {
     line-height:30px;
