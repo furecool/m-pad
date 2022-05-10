@@ -1,4 +1,11 @@
 module.exports = {
+    chainWebpack: config => {
+        config.plugin('html')
+            .tap(args => {
+            args[0].title = "台新銀行──營業廳經理平板"
+            return args;
+            })
+    },
     publicPath: './',
     // outputDir: 'dist',
     // assetsDir: './',
