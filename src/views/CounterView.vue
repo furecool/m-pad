@@ -31,9 +31,9 @@
 
             </div>
           </div>
-          <div class="offline-btn" @click="toggleOffLine">
-            <i v-if="offLine" class="fas fa-toggle-off"></i>
-            <i v-if="!offLine" class="fas fa-toggle-on"></i>
+          <div class="offline-btn">
+            <img src="../../public/img/toggle-off.svg" alt="" height="25" v-if="offLine" @click="toggleOffLine">
+            <img src="../../public/img/toggle-on.svg" alt="" height="25" v-if="!offLine" @click="toggleOffLine">
           </div> 
         </div>
 

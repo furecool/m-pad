@@ -22,9 +22,9 @@
         </router-link>
       </div>
       <div class="nav-icon">
-        <a href=""><i class="fa-solid fa-envelope "></i></a>
-        <a href=""><i class="fa-solid fa-power-off"></i></a>       
-      </div>      
+        <a href=""><img src="../public/img/envelope.svg" alt="" height="25"></a>
+        <a href=""><img src="../public/img/power-off.svg" alt="" height="25"></a>
+      </div>
     </nav>
 
     <!-- router-view -->
@@ -166,6 +166,7 @@ nav a {
 
 .nav-icon a {
   margin-left: 8px;
+  display: flex;
 }
 
 /* ----------------------- footer ----------------------- */
