@@ -201,10 +201,11 @@ export default {
   }
 
   .label-list li .li-square {
-    width: 20px;
-    height: 20px;
+    width: 17px;
+    height: 17px;
     background: #000;
     margin-right: 5px;
+    border-radius: 3px;
   }
 
   @media (max-width:768px) {
