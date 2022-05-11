@@ -3,7 +3,7 @@
     <div class="rectWrapper">
       <div class="rectChart"></div>
       <ul class="label-list">
-        <li v-for="(li, index) in labelList" :key="li.id"><i class="fa-solid fa-square" :style="labelColor[index]"></i> {{li}}</li>
+        <li v-for="(li, index) in labelList" :key="li.id"><div class="li-square" :style="labelBgColor[index]"></div> {{li}}</li>
       </ul>
     </div>
   </div>
@@ -26,13 +26,13 @@ export default {
         '服務人數',
         '滿意度',
       ],
-      labelColor: [
-        {color:'#1C58C8'},
-        {color:'#E67399'},
-        {color:'#00D9D1'},
-        {color:'#80C400'},
-        {color:'#E94024'},
-        {color:'#7D4BC5'}
+      labelBgColor: [
+        {background:'#1C58C8'},
+        {background:'#E67399'},
+        {background:'#00D9D1'},
+        {background:'#80C400'},
+        {background:'#E94024'},
+        {background:'#7D4BC5'}
       ],
       dataSet: [],
       width: 350,
@@ -196,6 +196,15 @@ export default {
     font-size: 1.2rem;
     line-height: 2rem;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+  }
+
+  .label-list li .li-square {
+    width: 20px;
+    height: 20px;
+    background: #000;
+    margin-right: 5px;
   }
 
   @media (max-width:768px) {
