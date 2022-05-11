@@ -434,7 +434,7 @@ export default {
               },
               {
                   "counterNum":"5",
-                  "counterName":"張三豐",
+                  "counterName":"張志豪",
                   "signIn":"08:59",
                   "serveGroup":"VR-服",
                   "status":"等待",
@@ -448,7 +448,7 @@ export default {
               },
               {
                   "counterNum":"6",
-                  "counterName":"段正淳",
+                  "counterName":"李宏恩",
                   "signIn":"08:59",
                   "serveGroup":"VR-服",
                   "status":"等待",
