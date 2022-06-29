@@ -13,7 +13,7 @@
             </div>
           </transition>
           <div class="call-assign" v-if="callAssignShow">
-            <img src="/callassign.png" alt="">
+            <img src="../../public/callassign.png" alt="">
             <div class="call-assign-close" @click="callAssignClose"></div>
           </div>
           <div class="cards">
