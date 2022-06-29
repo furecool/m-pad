@@ -1,11 +1,21 @@
 <template>
   <div class="counter">
-
       <div class="content">
+        <div class="call-card-close" v-if="callCardShow" @click="callCardClose"></div>
 
         <!-- ================ cards ================ -->
 
         <div class="cards-box">
+          <transition name="callCardShow-fade">
+            <div id="callCard" class="call-card" v-show="callCardShow">
+              <div class="three-d-btn" @click="callCardClose">立即叫號</div>
+              <div class="three-d-btn" @click="callAssign">指定叫號</div>
+            </div>
+          </transition>
+          <div class="call-assign" v-if="callAssignShow">
+            <img src="/callassign.png" alt="">
+            <div class="call-assign-close" @click="callAssignClose"></div>
+          </div>
           <div class="cards">
             <div class="scroll">
 
@@ -14,7 +24,7 @@
                   <div class="card" v-if="card.counterId || offLine == true" @click="sendCurrCard(card)">
                     
                       <div class="row-1">
-                        <div class="number" :class="{'inactive-number': !card.counterName}">{{card.counterNum}}</div>
+                        <div class="number" :class="{'inactive-number': !card.counterName}" @touchstart="callTouchstart($event,card)" @touchmove="callTouchmove" @touchend="callTouchend">{{card.counterNum}}</div>
                         <div class="name">{{card.counterName}}</div>
                         <div class="sign-in">{{card.signIn}}</div>
                       </div>
@@ -95,486 +105,58 @@ export default {
       getTime: 500,
       currentService: "ServiceTarget",
       currentCard: {},
+      callCardShow: false,
+      callAssignShow: false,
       info: [],
-      tData: {},
-      // tData: {
-      //   "waitTMax": 1200,
-      //   "waitTMin": 0,
-      //   "workTMax": 1800,
-      //   "workTMin": 0,
-      //   "breakTMax": 600,
-      //   "breakTMin": 0,
-      //   "serveP": 15,
-      //   "avgPoint": 10,
-      //   "sati": 5
-      // },
-      json: {
-          "inline": [
-              {
-                  "callNum":"1005",
-                  "clientCate":"預填",
-                  "serveCate":"一般收付",
-                  "waitT":168
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"6103",
-                  "clientCate":"VIP",
-                  "serveCate":"服務台",
-                  "waitT":379
-              },
-              {
-                  "callNum":"6308",
-                  "clientCate":"一般",
-                  "serveCate":"服務台",
-                  "waitT":768
-              },
-              {
-                  "callNum":"8305",
-                  "clientCate":"一般",
-                  "serveCate":"外匯",
-                  "waitT":56
-              },
-              {
-                  "callNum":"1005",
-                  "clientCate":"預填",
-                  "serveCate":"一般收付",
-                  "waitT":168
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"6103",
-                  "clientCate":"VIP",
-                  "serveCate":"服務台",
-                  "waitT":379
-              },
-              {
-                  "callNum":"6308",
-                  "clientCate":"一般",
-                  "serveCate":"服務台",
-                  "waitT":768
-              },
-              {
-                  "callNum":"8305",
-                  "clientCate":"一般",
-                  "serveCate":"外匯",
-                  "waitT":56
-              },
-              {
-                  "callNum":"1005",
-                  "clientCate":"預填",
-                  "serveCate":"一般收付",
-                  "waitT":168
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"6103",
-                  "clientCate":"VIP",
-                  "serveCate":"服務台",
-                  "waitT":379
-              },
-              {
-                  "callNum":"6308",
-                  "clientCate":"一般",
-                  "serveCate":"服務台",
-                  "waitT":768
-              },
-              {
-                  "callNum":"8305",
-                  "clientCate":"一般",
-                  "serveCate":"外匯",
-                  "waitT":56
-              },
-              {
-                  "callNum":"1005",
-                  "clientCate":"預填",
-                  "serveCate":"一般收付",
-                  "waitT":168
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"1310",
-                  "clientCate":"一般",
-                  "serveCate":"一般收付",
-                  "waitT":336
-              },
-              {
-                  "callNum":"6103",
-                  "clientCate":"VIP",
-                  "serveCate":"服務台",
-                  "waitT":379
-              },
-              {
-                  "callNum":"6308",
-                  "clientCate":"一般",
-                  "serveCate":"服務台",
-                  "waitT":768
-              },
-              {
-                  "callNum":"8305",
-                  "clientCate":"一般",
-                  "serveCate":"外匯",
-                  "waitT":56
-              }
-          ],
-          "counter": [
-              {
-                  "counterNum":"1",
-                  "counterName":"陳蘭麗",
-                  "signIn":"08:59",
-                  "serveGroup":"VR-服",
-                  "status":"等待",
-                  "workT": 0,
-                  "counterId":"134859",
-                  "waitT":435,
-                  "breakT":60,
-                  "serveP":11,
-                  "sati":3,
-                  "avgPoint":7
-              },
-              {
-                  "counterNum":"2",
-                  "counterName":"湯美茱",
-                  "signIn":"08:48",
-                  "serveGroup":"VR-外",
-                  "status":"暫停",
-                  "workT":408,
-                  "counterId":"135637",
-                  "waitT":635,
-                  "breakT":135,
-                  "serveP":4,
-                  "sati":2,
-                  "avgPoint":5
-              },
-              {
-                  "counterNum":"3",
-                  "counterName":"李千英",
-                  "signIn":"08:59",
-                  "serveGroup":"外-服",
-                  "status":"服務中",
-                  "workT":479,
-                  "counterId":"139890",
-                  "waitT":390,
-                  "breakT":195,
-                  "serveP":10,
-                  "sati":4,
-                  "avgPoint":7
-              },
-              {
-                  "counterNum":"4",
-                  "counterName":"劉力皇",
-                  "signIn":"08:48",
-                  "serveGroup":"VR-服",
-                  "status":"服務中",
-                  "workT":1475,
-                  "counterId":"135787",
-                  "waitT":640,
-                  "breakT":150,
-                  "serveP":7,
-                  "sati":5,
-                  "avgPoint":6
-              },
-              {
-                  "counterNum":"5",
-                  "counterName":"張志豪",
-                  "signIn":"08:59",
-                  "serveGroup":"VR-服",
-                  "status":"等待",
-                  "workT": 660,
-                  "counterId":"134845",
-                  "waitT":875,
-                  "breakT":120,
-                  "serveP":11,
-                  "sati":3,
-                  "avgPoint":7
-              },
-              {
-                  "counterNum":"6",
-                  "counterName":"李宏恩",
-                  "signIn":"08:59",
-                  "serveGroup":"VR-服",
-                  "status":"等待",
-                  "workT": 600,
-                  "counterId":"134727",
-                  "waitT":575,
-                  "breakT":150,
-                  "serveP":8,
-                  "sati":2,
-                  "avgPoint":6
-              },
-              {
-                  "counterNum":"7",
-                  "counterName":"",
-                  "signIn":"",
-                  "serveGroup":"",
-                  "status":"",
-                  "workT":"",
-                  "counterId":"",
-                  "waitT":"",
-                  "breakT":"",
-                  "serveP":"",
-                  "sati":"",
-                  "avgPoint":""
-              },
-              {
-                  "counterNum":"8",
-                  "counterName":"",
-                  "signIn":"",
-                  "serveGroup":"",
-                  "status":"",
-                  "workT":"",
-                  "counterId":"",
-                  "waitT":"",
-                  "breakT":"",
-                  "serveP":"",
-                  "sati":"",
-                  "avgPoint":""
-              },
-              {
-                  "counterNum":"9",
-                  "counterName":"",
-                  "signIn":"",
-                  "serveGroup":"",
-                  "status":"",
-                  "workT":"",
-                  "counterId":"",
-                  "waitT":"",
-                  "breakT":"",
-                  "serveP":"",
-                  "sati":"",
-                  "avgPoint":""
-              }
-          ]
-      },
+      tData: {}
     }
   },
   created() {
-    // let that = this
-    // // let url = 'http://localhost:2211/api/visualdata'
-    // let url = '/info.json'
-    // // let url = 'Api/api/visualdata'
-    // function getInfo() {
-    //   that.$ajax.get(url)
-    //   .then(function(res) {
-    //     that.info = res.data.counter
-    //     // that.tData = res.data.tData
-    //     // 或在此計算 tData
-    //     that.tData.waitTMax = Math.max.apply(null, that.info.map(function (o) {
-    //       return o.waitT;
-    //       }))
-    //     that.tData.waitTMin = Math.min.apply(null, that.info.map(function (o) {
-    //       return o.waitT;
-    //       }))
-    //     that.tData.breakTMax = Math.max.apply(null, that.info.map(function (o) {
-    //       return o.breakT;
-    //       }))
-    //     that.tData.breakTMin = Math.min.apply(null, that.info.map(function (o) {
-    //       return o.breakT;
-    //       }))
-    //     that.tData.workTMax = Math.max.apply(null, that.info.map(function (o) {
-    //       return o.workT;
-    //       }))
-    //     that.tData.workTMin = Math.min.apply(null, that.info.map(function (o) {
-    //       return o.workT;
-    //       }))
-    //     that.tData.serveP = Math.max.apply(null, that.info.map(function (o) {
-    //       return o.serveP;
-    //       }))
-    //     that.tData.avgPoint = 10;
-    //     that.tData.sati = 5;
+    let vm = this
+    // // let url = 'https://furecool.github.io/m-pad/info.json'
+    let url = '/info.json'
+    function getInfo() {
+      vm.$ajax.get(url)
+      .then(function(res) {
+        // console.log("connecting...")
+        vm.info = res.data.counter
+        vm.tData.waitTMax = Math.max.apply(null, vm.info.map(function (o) {
+          return o.waitT;
+          }))
+        vm.tData.waitTMin = Math.min.apply(null, vm.info.map(function (o) {
+          return o.waitT;
+          }))
+        vm.tData.breakTMax = Math.max.apply(null, vm.info.map(function (o) {
+          return o.breakT;
+          }))
+        vm.tData.breakTMin = Math.min.apply(null, vm.info.map(function (o) {
+          return o.breakT;
+          }))
+        vm.tData.workTMax = Math.max.apply(null, vm.info.map(function (o) {
+          return o.workT;
+          }))
+        vm.tData.workTMin = Math.min.apply(null, vm.info.map(function (o) {
+          return o.workT;
+          }))
+        vm.tData.serveP = Math.max.apply(null, vm.info.map(function (o) {
+          return o.serveP;
+          }))
+        vm.tData.avgPoint = 10;
+        vm.tData.sati = 5;
 
-    //   })
-    //   .catch(function(err) { 
-    //       console.log(err)
-    //   })
-    // }
-    // clearInterval(setInterval(getInfo, that.getTime))
-    // getInfo()
-    // setInterval(getInfo, that.getTime)
-
-    this.info = this.json.counter
-    this.tData.waitTMax = Math.max.apply(null, this.info.map(function (o) {
-      return o.waitT;
-      }))
-    this.tData.waitTMin = Math.min.apply(null, this.info.map(function (o) {
-      return o.waitT;
-      }))
-    this.tData.breakTMax = Math.max.apply(null, this.info.map(function (o) {
-      return o.breakT;
-      }))
-    this.tData.breakTMin = Math.min.apply(null, this.info.map(function (o) {
-      return o.breakT;
-      }))
-    this.tData.workTMax = Math.max.apply(null, this.info.map(function (o) {
-      return o.workT;
-      }))
-    this.tData.workTMin = Math.min.apply(null, this.info.map(function (o) {
-      return o.workT;
-      }))
-    this.tData.serveP = Math.max.apply(null, this.info.map(function (o) {
-      return o.serveP;
-      }))
-    this.tData.avgPoint = 10;
-    this.tData.sati = 5;
-    
+      })
+      .catch(function(err) {
+        console.log(err)
+      })
+    }
+    clearInterval(setInterval(getInfo, this.getTime))
+    getInfo()
+    setInterval(getInfo, this.getTime)
+  },
+  mounted() {
+        window.addEventListener('contextmenu', function(e){
+          e.preventDefault();
+        });
   },
   watch: {
     info: function() {
@@ -600,6 +182,37 @@ export default {
     toggleOffLine() {
       this.offLine = !this.offLine
     },
+    callCardClose() {
+      this.callCardShow = false
+    },
+    callTouchstart (e,card) {
+      if(card.counterName) {
+        this.loop = setTimeout(() => {
+          let callCard = document.getElementById("callCard")
+          if(e.targetTouches[0].clientX <= 850) {
+            callCard.style.left = (e.targetTouches[0].clientX - 42) + 'px'
+          } else {
+            callCard.style.left = (e.targetTouches[0].clientX - 160) + 'px'
+          }          
+          this.callCardShow = true
+        }, 500)
+
+        return false
+      }
+    },
+    callTouchmove () {
+      clearTimeout(this.loop)
+    },
+    callTouchend () {
+      clearTimeout(this.loop)
+    },
+    callAssign() {
+      this.callAssignShow = true
+      this.callCardShow = false
+    },
+    callAssignClose() {
+      this.callAssignShow = false
+    }
   },
 
 }
@@ -610,7 +223,6 @@ export default {
     display: flex;
     flex-direction: column;
   }
-
   .counter .content {
     padding: 10px 0 0 0;
     /* background-color: rgba(0, 0, 0, .15); */
@@ -619,6 +231,13 @@ export default {
     right: 40px;
     bottom: 60px;
     top: 105px;
+  }
+  .call-card-close {
+    position: absolute;
+    z-index: 1;
+    /* background: rgba(100, 100, 100, .7); */
+    width: 100%;
+    height: 100%;
   }
 
   /* ----------------------- card ----------------------- */
@@ -633,6 +252,44 @@ export default {
   }
   .offline-btn i {
     font-size: 24px;
+  }
+  .call-card {
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #fff;
+    text-decoration: none;
+    position: absolute;
+    top: 35px;
+    z-index: 1;
+    /* background: rgba(100, 100, 100, .5); */
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  /* .call-card .three-d-btn:active {
+    background: linear-gradient(to bottom,  #a81818 31%,#ec8c8c 100%);
+  } */
+  .call-assign {
+    /* background: rgba(100, 100, 100, .5); */
+    position: absolute;
+    top: 60px;
+    z-index: 1;
+    width: 100%;
+    /* height: 100%; */
+  }
+  .call-assign img {
+    width: 100%;
+    border: #888888 solid 3px;
+    border-radius: 10px;
+  }
+  .call-assign-close {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    /* background: rgba(100, 100, 100, .5); */
+    width: 50px;
+    height: 50px;
   }
   .counter .cards {
     flex: 1;
@@ -674,8 +331,10 @@ export default {
   .counter .number {
     color: #fff;
     position: absolute;
-    left: 10px;
+    left: 3px;
     z-index: 0;
+    width: 25px;
+    height: 25px;
   }
   .counter .number:before {
     content:"";
@@ -685,7 +344,7 @@ export default {
     height: 25px;
     border-radius: 50%;
     position: absolute;
-    top: -3px; right: 0; bottom: 0; left: -8px;
+    top: -3px; right: 0; bottom: 0; left: 0px;
     z-index: -1;
   }
   .counter .inactive-number:before {
@@ -722,6 +381,15 @@ export default {
   }
   .counter .inactive-status {
     color: #727272;
+  }
+
+  .callCardShow-fade-enter-active,
+  .callCardShow-fade-leave-active {
+    transition: all 0.2s;
+  }
+  .callCardShow-fade-enter,
+  .callCardShow-fade-leave-to {
+      opacity: 0;
   }
 
   /* ----------------------- service-chart ----------------------- */

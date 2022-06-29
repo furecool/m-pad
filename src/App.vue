@@ -20,6 +20,12 @@
         <router-link to="/counter">
           <div class="three-d-btn">櫃台監控</div>
         </router-link>
+        <router-link to="/review">
+          <div class="three-d-btn">主管覆核</div>
+        </router-link>
+        <router-link to="/take">
+          <div class="three-d-btn">取號功能</div>
+        </router-link>
       </div>
       <div class="nav-icon">
         <a href=""><img src="../public/img/envelope.svg" alt="" height="25"></a>
@@ -58,6 +64,8 @@
 html {
   height: 100vh;
   background:linear-gradient(160deg,#e9e9e9,#cccccc, #afafaf);
+  user-select: none;
+  -webkit-user-select: none;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
