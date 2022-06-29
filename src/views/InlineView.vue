@@ -60,8 +60,8 @@ export default {
   },
   created() {
     let vm = this
-    // // let url = 'https://furecool.github.io/m-pad/info.json'
-    let url = '/info.json'
+    let url = 'https://furecool.github.io/m-pad/info.json'
+    // let url = '/info.json'
     function getInfo() {
       vm.$ajax.get(url)
       .then(function(res) {
