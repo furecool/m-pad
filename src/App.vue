@@ -1,37 +1,43 @@
 <template>
   <div id="app">
 
-    <!-- app-top -->
-    <div class="app-top"></div>
+    <!-- app-header -->
+    <div class="app-header">
+      <div class="app-header-bg"></div>
 
-    <!-- logo -->
-    <div class="logo">      
-      <img src="./assets/TSB_logo.png">
-      <p class="logo-tsb">台新銀行</p>
-      <p class="logo-pab">營業廳經理平版</p>
+      <!-- app-top -->
+      <div class="app-top"></div>
+
+      <!-- logo -->
+      <div class="logo">      
+        <img src="./assets/TSB_logo.png">
+        <p class="logo-tsb">台新銀行</p>
+        <p class="logo-pab">營業廳經理平版</p>
+      </div>
+
+      <!-- nav -->
+      <nav>
+        <div class="router">
+          <router-link to="/">
+            <div class="three-d-btn">排隊監控</div>
+          </router-link>
+          <router-link to="/counter">
+            <div class="three-d-btn">櫃台監控</div>
+          </router-link>
+          <router-link to="/review">
+            <div class="three-d-btn">主管覆核</div>
+          </router-link>
+          <router-link to="/take">
+            <div class="three-d-btn">取號功能</div>
+          </router-link>
+        </div>
+        <div class="nav-icon">
+          <a href=""><img src="../public/img/envelope.svg" alt="" height="25"></a>
+          <a href=""><img src="../public/img/power-off.svg" alt="" height="25"></a>
+        </div>
+      </nav>
+
     </div>
-
-    <!-- nav -->
-    <nav>
-      <div class="router">
-        <router-link to="/">
-          <div class="three-d-btn">排隊監控</div>
-        </router-link>
-        <router-link to="/counter">
-          <div class="three-d-btn">櫃台監控</div>
-        </router-link>
-        <router-link to="/review">
-          <div class="three-d-btn">主管覆核</div>
-        </router-link>
-        <router-link to="/take">
-          <div class="three-d-btn">取號功能</div>
-        </router-link>
-      </div>
-      <div class="nav-icon">
-        <a href=""><img src="../public/img/envelope.svg" alt="" height="25"></a>
-        <a href=""><img src="../public/img/power-off.svg" alt="" height="25"></a>
-      </div>
-    </nav>
 
     <!-- router-view -->
     <keep-alive>
@@ -63,7 +69,7 @@
 }
 html {
   height: 100vh;
-  background:linear-gradient(160deg,#e9e9e9,#cccccc, #afafaf);
+  background: #c9c9c9;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -72,20 +78,35 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  /* position: relative; */
+}
+.app-header {
+  height: 106px;
+  z-index: 100;
+}
+.app-header-bg {
+  position: fixed;
+  background: #c9c9c9;
+  width: 100%;
+  height: 106px;
+  left: 0;
 }
 
 /* ----------------------- top / logo ----------------------- */
 
 .app-top {
+  position: fixed;
+  top: 0;
   width: 100%;
   height: 10px;
   background-color: #d70c18;
 }
 
 .logo {
+  position: fixed;
+  top: 10px;
+  margin-left: 50%;
+  left: -200px;
   display: flex;
-  justify-content: center;
   align-items: center;
   height: 50px;
   background:radial-gradient(circle farthest-side at center,rgb(243, 243, 243), transparent 75%);
@@ -112,8 +133,10 @@ html {
 /* ----------------------- nav ----------------------- */
 
 nav {
+  position: fixed;
+  top: 60px;
+  margin-left: 5%;
   width: 90%;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
 }
@@ -137,8 +160,6 @@ nav a {
               3px 5px 3px 0px rgba(0, 0, 0, .3);
   width: 120px;
   height: 30px;
-  /* width: 100px;
-  height: 25px; */
   margin: 8px 10px 8px 0;
   transition:  all 0.1s ease-in-out;
   border: none;
@@ -147,11 +168,9 @@ nav a {
 
 .three-d-btn:before {
   content: "";
-  width: 110px; 
-  height: 20px; 
-  /* width: 90px; 
-  height: 16px;  */
-  display: block; 
+  width: 110px;
+  height: 20px;
+  display: block;
   position: absolute;
   top:0px;
   left: 5px;

@@ -12,7 +12,6 @@
         <div class="cards">
           <div class="scroll">
             <div class="card" v-for="card in infoCate(item)" :key="card.id">
-              <div class="card-bar"></div>
               <div class="card-cate" v-if="card.clientCate == '一般'"></div>
               <div class="card-cate" v-if="card.clientCate == '預填'">S</div>
               <div class="card-cate" v-if="card.clientCate == 'VIP'" style="color: rgb(47, 196, 255);">V</div>
@@ -170,14 +169,9 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     position: relative;
-  }
-
-  .inline .card-bar {
-    width: 100%;
-    height: 5px;
-    background-color: #d70c18;
+    border-top: #d70c18 5px solid;
   }
 
   .inline .card-cate {
@@ -185,7 +179,7 @@ export default {
     font-size: 18px;
     font-weight: bold;
     position: absolute;
-    top: 6px;
+    top: 4px;
     left: 10px;
   }
 
@@ -198,7 +192,7 @@ export default {
   .inline .card-time {
     color: #727272;
     font-size: 14px;
-    margin-bottom: 2px;
+    margin: 2px;
   }
 
   /* ----------------------- waiting ----------------------- */

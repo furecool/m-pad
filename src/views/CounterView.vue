@@ -271,12 +271,11 @@ export default {
     background: linear-gradient(to bottom,  #a81818 31%,#ec8c8c 100%);
   } */
   .call-assign {
-    /* background: rgba(100, 100, 100, .5); */
+    background: rgba(100, 100, 100, .5);
     position: absolute;
     top: 60px;
     z-index: 1;
     width: 100%;
-    /* height: 100%; */
   }
   .call-assign img {
     width: 100%;
