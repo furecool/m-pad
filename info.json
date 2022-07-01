@@ -1,267 +1,171 @@
 {
     "inline": [
         {
-            "callNum":"1005",
-            "clientCate":"預填",
-            "serveCate":"一般收付",
+            "callNum":1350,
+            "clientCate":"prefill",
+            "serveCate":"臺幣交易",
             "waitT":168
         },
         {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
+            "callNum":1351,
+            "clientCate":"normal",
+            "serveCate":"臺幣交易",
             "waitT":336
         },
         {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
+            "callNum":1352,
+            "clientCate":"vip",
+            "serveCate":"臺幣交易",
             "waitT":336
         },
         {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
+            "callNum":1353,
+            "clientCate":"normal",
+            "serveCate":"臺幣交易",
             "waitT":336
         },
         {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
+            "callNum":1354,
+            "clientCate":"prefill",
+            "serveCate":"臺幣交易",
             "waitT":336
         },
         {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
+            "callNum":1355,
+            "clientCate":"normal",
+            "serveCate":"臺幣交易",
             "waitT":336
         },
         {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
+            "callNum":1356,
+            "clientCate":"normal",
+            "serveCate":"臺幣交易",
             "waitT":336
         },
         {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
+            "callNum":1357,
+            "clientCate":"normal",
+            "serveCate":"臺幣交易",
             "waitT":336
         },
         {
-            "callNum":"6103",
-            "clientCate":"VIP",
-            "serveCate":"服務台",
+            "callNum":5303,
+            "clientCate":"vip",
+            "serveCate":"各項申請",
             "waitT":379
         },
         {
-            "callNum":"6308",
-            "clientCate":"一般",
-            "serveCate":"服務台",
+            "callNum":5304,
+            "clientCate":"normal",
+            "serveCate":"各項申請",
             "waitT":768
         },
         {
-            "callNum":"8305",
-            "clientCate":"一般",
-            "serveCate":"外匯",
+            "callNum":6299,
+            "clientCate":"normal",
+            "serveCate":"開戶服務",
             "waitT":56
         },
         {
-            "callNum":"1005",
-            "clientCate":"預填",
-            "serveCate":"一般收付",
-            "waitT":168
-        },
-        {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
-            "waitT":336
-        },
-        {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
-            "waitT":336
-        },
-        {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
-            "waitT":336
-        },
-        {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
-            "waitT":336
-        },
-        {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
-            "waitT":336
-        },
-        {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
-            "waitT":336
-        },
-        {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
-            "waitT":336
-        },
-        {
-            "callNum":"6103",
-            "clientCate":"VIP",
-            "serveCate":"服務台",
+            "callNum":5305,
+            "clientCate":"normal",
+            "serveCate":"各項申請",
             "waitT":379
         },
         {
-            "callNum":"6308",
-            "clientCate":"一般",
-            "serveCate":"服務台",
+            "callNum":1043,
+            "clientCate":"normal",
+            "serveCate":"各項申請",
             "waitT":768
         },
         {
-            "callNum":"8305",
-            "clientCate":"一般",
-            "serveCate":"外匯",
+            "callNum":6300,
+            "clientCate":"vip",
+            "serveCate":"開戶服務",
             "waitT":56
         },
         {
-            "callNum":"1005",
-            "clientCate":"預填",
-            "serveCate":"一般收付",
-            "waitT":168
-        },
-        {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
-            "waitT":336
-        },
-        {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
-            "waitT":336
-        },
-        {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
-            "waitT":336
-        },
-        {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
-            "waitT":336
-        },
-        {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
-            "waitT":336
-        },
-        {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
-            "waitT":336
-        },
-        {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
-            "waitT":336
-        },
-        {
-            "callNum":"6103",
-            "clientCate":"VIP",
-            "serveCate":"服務台",
+            "callNum":5306,
+            "clientCate":"prefill",
+            "serveCate":"各項申請",
             "waitT":379
         },
         {
-            "callNum":"6308",
-            "clientCate":"一般",
-            "serveCate":"服務台",
+            "callNum":5307,
+            "clientCate":"normal",
+            "serveCate":"各項申請",
             "waitT":768
         },
         {
-            "callNum":"8305",
-            "clientCate":"一般",
-            "serveCate":"外匯",
+            "callNum":6301,
+            "clientCate":"prefill",
+            "serveCate":"開戶服務",
             "waitT":56
         },
         {
-            "callNum":"1005",
-            "clientCate":"預填",
-            "serveCate":"一般收付",
+            "callNum":8309,
+            "clientCate":"prefill",
+            "serveCate":"外幣交易",
             "waitT":168
         },
         {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
+            "callNum":8310,
+            "clientCate":"normal",
+            "serveCate":"外幣交易",
             "waitT":336
         },
         {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
+            "callNum":8311,
+            "clientCate":"normal",
+            "serveCate":"外幣交易",
             "waitT":336
         },
         {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
+            "callNum":8312,
+            "clientCate":"vip",
+            "serveCate":"外幣交易",
             "waitT":336
         },
         {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
+            "callNum":7307,
+            "clientCate":"normal",
+            "serveCate":"繳費服務",
             "waitT":336
         },
         {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
+            "callNum":7308,
+            "clientCate":"normal",
+            "serveCate":"繳費服務",
             "waitT":336
         },
         {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
+            "callNum":7309,
+            "clientCate":"vip",
+            "serveCate":"繳費服務",
             "waitT":336
         },
         {
-            "callNum":"1310",
-            "clientCate":"一般",
-            "serveCate":"一般收付",
+            "callNum":7310,
+            "clientCate":"prefill",
+            "serveCate":"繳費服務",
             "waitT":336
         },
         {
-            "callNum":"6103",
-            "clientCate":"VIP",
-            "serveCate":"服務台",
+            "callNum":5308,
+            "clientCate":"vip",
+            "serveCate":"各項申請",
             "waitT":379
         },
         {
-            "callNum":"6308",
-            "clientCate":"一般",
-            "serveCate":"服務台",
+            "callNum":5309,
+            "clientCate":"normal",
+            "serveCate":"各項申請",
             "waitT":768
         },
         {
-            "callNum":"8305",
-            "clientCate":"一般",
-            "serveCate":"外匯",
+            "callNum":6302,
+            "clientCate":"normal",
+            "serveCate":"開戶服務",
             "waitT":56
         }
     ],
