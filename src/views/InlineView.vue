@@ -3,7 +3,7 @@
 
     <div class="wrapper">
 
-      <div class="content" v-for="item in cate" :key="item.id">
+      <div class="content" v-for="item in $store.state.cates" :key="item.id">
 
         <div class="cate">
           <p>{{item}}</p>
@@ -12,10 +12,10 @@
         <div class="cards">
           <div class="scroll">
             <div class="card" v-for="card in infoCate(item)" :key="card.id">
-              <div class="card-cate" v-if="card.clientCate == '一般'"></div>
-              <div class="card-cate" v-if="card.clientCate == '預填'">S</div>
-              <div class="card-cate" v-if="card.clientCate == 'VIP'" style="color: rgb(47, 196, 255);">V</div>
-              <div class="card-number">{{card.callNum}}</div>
+              <div class="card-cate" v-if="card.clientCate == 'normal'"></div>
+              <div class="card-cate" v-if="card.clientCate == 'prefill'">S</div>
+              <div class="card-cate" v-if="card.clientCate == 'vip'" style="color: rgb(47, 196, 255);">V</div>
+              <div class="card-number" v-text="callNum(card)"></div>
               <div class="card-time"><p :style="waitTColor(card)">{{waitMin(card)}} : {{waitSec(card)}}</p></div>
             </div>
           </div>
@@ -47,39 +47,16 @@ export default {
   },
   data() {
     return {
-      getTime: 500,
-      warnTime: 360,
-      cate: [
-        "一般收付",
-        "服務台",
-        "外匯"
-      ],
-      info: []
+      warnTime: 360,        
     }
   },
   created() {
-    let vm = this
-    let url = 'https://furecool.github.io/m-pad/info.json'
-    // let url = '/info.json'
-    function getInfo() {
-      vm.$ajax.get(url)
-      .then(function(res) {
-        // console.log("connecting...")
-        vm.info = res.data.inline
-
-      })
-      .catch(function(err) {
-        console.log(err)
-      })
-    }
-    clearInterval(setInterval(getInfo, this.getTime))
-    getInfo()
-    setInterval(getInfo, this.getTime)
+    
   },
   methods: {
     infoCate(item) {
       let arr = []
-      this.info.forEach(function(card) {
+      this.$store.state.infoInline.forEach(function(card) {
         if(card.serveCate == item) {
           arr.push(card)
         }
@@ -98,7 +75,7 @@ export default {
       let vm = this
       vm.waitingP = 0
       let color
-      this.info.forEach(function(card) {
+      this.$store.state.infoInline.forEach(function(card) {
         if(card.serveCate == item) {
           vm.waitingP += 1
         }
@@ -114,6 +91,9 @@ export default {
       if(card.waitT >= this.warnTime) {
         return 'color: #d70c18;'
       }    
+    },
+    callNum(card) {
+      return card.callNum.toString().padStart(4, '0')
     }
   },
 

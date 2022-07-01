@@ -49,13 +49,11 @@ export default {
     }
   },
   mounted() {
-    this.dataGen();
-    this.draw();
+    this.init()
   },
   watch: {
     obj: function() {
-      this.dataGen();
-      this.draw();      
+      this.init()
     }    
   },
   computed: {
@@ -64,6 +62,11 @@ export default {
     }
   },
   methods: {
+
+    init() {
+      this.dataGen();
+      this.draw();
+    },
 
     dataGen() {
       this.dataSet = [          

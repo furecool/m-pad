@@ -59,6 +59,42 @@
   </div>  
 </template>
 
+<script>
+
+export default {
+
+  data() {
+    return {
+      getTime: 500,
+    }
+  },
+  created() {
+    let vm = this
+    let url = 'https://furecool.github.io/m-pad/info.json'
+    // let url = '/info.json'
+    function getInfo() {
+      vm.$ajax.get(url)
+      .then(function(res) {
+        console.log("get data...🚀")
+        vm.$store.state.infoInline = res.data.inline
+        vm.$store.state.infoCounter = res.data.counter
+      })
+      .catch(function(err) {
+        console.log(err)
+      })
+    }
+    // clearInterval(setInterval(getInfo, this.getTime))
+    getInfo()
+    // setInterval(getInfo, this.getTime)
+
+    window.addEventListener('contextmenu', function(e){
+      e.preventDefault();
+    });
+  }
+
+}
+</script>
+
 <style>
 
 /* #8b8b8b #666666 #818181 #1e1e1e #727272 #ff850d #289cff */
@@ -100,7 +136,6 @@ html {
   height: 10px;
   background-color: #d70c18;
 }
-
 .logo {
   position: fixed;
   top: 10px;
@@ -111,7 +146,6 @@ html {
   height: 50px;
   background:radial-gradient(circle farthest-side at center,rgb(243, 243, 243), transparent 75%);
 }
-
 .logo img {
   width: 35px;
 }
@@ -140,18 +174,15 @@ nav {
   display: flex;
   justify-content: space-between;
 }
-
 .router {
   display: flex;
 }
-
 nav a {
   font-weight: bold;
   letter-spacing: 2px;
   color: #fff;
   text-decoration: none;
 }
-
 .three-d-btn {
   line-height:30px;
   position: relative;
@@ -165,7 +196,6 @@ nav a {
   border: none;
   border-radius: 5em;
 }
-
 .three-d-btn:before {
   content: "";
   width: 110px;
@@ -179,18 +209,15 @@ nav a {
   background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.7) 8%,rgba(255,255,255,0) 100%);
   transition:  all 0.1s ease-in-out;
 }
-
 .router-link-exact-active .three-d-btn{
   background: linear-gradient(to bottom,  #a81818 31%,#ec8c8c 100%);
 }
-
 .nav-icon {
   display: flex;
   align-items: center;
   font-size: 1.3rem;
   color: #fff;
 }
-
 .nav-icon a {
   margin-left: 8px;
   display: flex;
@@ -205,7 +232,6 @@ nav a {
   height: 50px;
   display: flex;
 }
-
 .bg-r {
   background-color: #d70c18;
   flex-grow: 1;
@@ -213,7 +239,6 @@ nav a {
   align-items: center;
   justify-content: end;
 }
-
 .bg-g {
   background-color: #898989;
   width: 110px;
@@ -222,15 +247,12 @@ nav a {
   align-items: center;
   justify-content: end;
 }
-
 .bg-r img {
   width: 28px;
 }
-
 .bg-g img {
   width: 24px;
 }
-
 .logo-w-txt {
   color: #fff;
   font-size: 20px;
@@ -238,14 +260,10 @@ nav a {
   margin: 0 35px 0 5px;
   letter-spacing: 2px;
 }
-
 .logo-g-txt {
   color: #fff;
   font-size: 12px;
   margin-bottom: 2px;
 }
-
-
-
 
 </style>

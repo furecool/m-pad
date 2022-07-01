@@ -12,14 +12,10 @@
               <div class="three-d-btn" @click="callAssign">指定叫號</div>
             </div>
           </transition>
-          <div class="call-assign" v-if="callAssignShow">
-            <img src="../../public/callassign.png" alt="">
-            <div class="call-assign-close" @click="callAssignClose"></div>
-          </div>
           <div class="cards">
             <div class="scroll">
 
-              <div v-for="card in info" :key="card.id">
+              <div v-for="card in $store.state.infoCounter" :key="card.id">
 
                   <div class="card" v-if="card.counterId || offLine == true" @click="sendCurrCard(card)">
                     
@@ -44,6 +40,48 @@
           <div class="offline-btn">
             <img src="../../public/img/toggle-off.svg" alt="" height="25" v-if="offLine" @click="toggleOffLine">
             <img src="../../public/img/toggle-on.svg" alt="" height="25" v-if="!offLine" @click="toggleOffLine">
+          </div>
+          <div class="call-assign" v-if="callAssignShow">
+            <div class="call-assign-list">
+              <div class="call-assign-close" @click="callAssignClose">X</div>
+              <div class="call-assign-list-title">指定叫號列表</div>
+              <div class="call-assign-list-nav">
+                <div class="call-assign-list-nav-num">
+                  <div class="call-assign-list-nav-num-title">
+                    號碼: {{currentAssign.callNum}}
+                  </div>
+                </div>
+                <div class="call-assign-list-nav-cate">
+                  <div>服務類別</div>
+                  <select class="call-assign-list-nav-cate-dropdown" v-model="currentServeCate">
+                    <option v-for="cate in $store.state.cates" :key="cate.id">{{cate}}</option>
+                  </select>
+                </div>
+                <div class="call-assign-list-nav-assign">
+                  <div class="three-d-btn" @click="assignFunc">指 定</div>
+                </div>
+              </div>
+              <div class="call-assign-list-content">
+                <div class="call-assign-list-content-header">
+                  <div class="call-assign-list-content-header-item">叫號號碼</div>
+                  <div class="call-assign-list-content-header-item">客戶種類</div>
+                  <div class="call-assign-list-content-header-item">服務類別</div>
+                  <div class="call-assign-list-content-header-item">取號時間</div>
+                  <div class="call-assign-list-content-header-item">等待時間</div>
+                </div>
+                <div class="call-assign-list-content-data">
+                  <div class="call-assign-list-content-row" v-for="card in infoCate()" :key="card.id" @click="assignCard(card)" :class="{ assignActive: currentAssign == card }">
+                    <div class="call-assign-list-content-row-item" v-text="callNum(card)"></div>
+                    <div class="call-assign-list-content-row-item" v-if="card.clientCate == 'normal'">一般</div>
+                    <div class="call-assign-list-content-row-item" v-if="card.clientCate == 'prefill'">預填</div>
+                    <div class="call-assign-list-content-row-item" v-if="card.clientCate == 'vip'">VIP</div>
+                    <div class="call-assign-list-content-row-item" v-text="currentServeCate"></div>
+                    <div class="call-assign-list-content-row-item">2022-07-01-14:45</div>
+                    <div class="call-assign-list-content-row-item">等待時間</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div> 
         </div>
 
@@ -102,70 +140,49 @@ export default {
   data() {
     return {
       offLine: true,
-      getTime: 500,
       currentService: "ServiceTarget",
       currentCard: {},
       callCardShow: false,
       callAssignShow: false,
-      info: [],
-      tData: {}
+      tData: {},
+      currentServeCate: '臺幣交易',
+      currentAssign: {}
     }
-  },
-  created() {
-    let vm = this
-    let url = 'https://furecool.github.io/m-pad/info.json'
-    // let url = '/info.json'
-    function getInfo() {
-      vm.$ajax.get(url)
-      .then(function(res) {
-        // console.log("connecting...")
-        vm.info = res.data.counter
-        vm.tData.waitTMax = Math.max.apply(null, vm.info.map(function (o) {
-          return o.waitT;
-          }))
-        vm.tData.waitTMin = Math.min.apply(null, vm.info.map(function (o) {
-          return o.waitT;
-          }))
-        vm.tData.breakTMax = Math.max.apply(null, vm.info.map(function (o) {
-          return o.breakT;
-          }))
-        vm.tData.breakTMin = Math.min.apply(null, vm.info.map(function (o) {
-          return o.breakT;
-          }))
-        vm.tData.workTMax = Math.max.apply(null, vm.info.map(function (o) {
-          return o.workT;
-          }))
-        vm.tData.workTMin = Math.min.apply(null, vm.info.map(function (o) {
-          return o.workT;
-          }))
-        vm.tData.serveP = Math.max.apply(null, vm.info.map(function (o) {
-          return o.serveP;
-          }))
-        vm.tData.avgPoint = 10;
-        vm.tData.sati = 5;
-
-      })
-      .catch(function(err) {
-        console.log(err)
-      })
-    }
-    clearInterval(setInterval(getInfo, this.getTime))
-    getInfo()
-    setInterval(getInfo, this.getTime)
-  },
-  mounted() {
-        window.addEventListener('contextmenu', function(e){
-          e.preventDefault();
-        });
   },
   watch: {
-    info: function() {
+    '$store.state.infoCounter': function() {
       if(JSON.stringify(this.currentCard) === '{}') {
-        this.currentCard = this.info[0]
+        this.currentCard = this.$store.state.infoCounter[0]
       }
+      this.setTdata()
     },
   },
   methods: {
+    setTdata() {
+      this.tData.waitTMax = Math.max.apply(null, this.$store.state.infoCounter.map(function (o) {
+        return o.waitT;
+        }))
+      this.tData.waitTMin = Math.min.apply(null, this.$store.state.infoCounter.map(function (o) {
+        return o.waitT;
+        }))
+      this.tData.breakTMax = Math.max.apply(null, this.$store.state.infoCounter.map(function (o) {
+        return o.breakT;
+        }))
+      this.tData.breakTMin = Math.min.apply(null, this.$store.state.infoCounter.map(function (o) {
+        return o.breakT;
+        }))
+      this.tData.workTMax = Math.max.apply(null, this.$store.state.infoCounter.map(function (o) {
+        return o.workT;
+        }))
+      this.tData.workTMin = Math.min.apply(null, this.$store.state.infoCounter.map(function (o) {
+        return o.workT;
+        }))
+      this.tData.serveP = Math.max.apply(null, this.$store.state.infoCounter.map(function (o) {
+        return o.serveP;
+        }))
+      this.tData.avgPoint = 10;
+      this.tData.sati = 5;
+    },
     sendCurrCard(card) {
       if(card.counterName) {
         this.currentCard = card
@@ -197,6 +214,8 @@ export default {
           this.callCardShow = true
         }, 500)
 
+        this.currentCard = card
+
         return false
       }
     },
@@ -212,6 +231,35 @@ export default {
     },
     callAssignClose() {
       this.callAssignShow = false
+    },
+    infoCate() {
+      let vm = this
+      let arr = []
+      this.$store.state.infoInline.forEach(function(card) {
+        if(card.serveCate == vm.currentServeCate) {
+          arr.push(card)
+        }
+      })
+      return arr
+    },
+    callNum(card) {
+      return card.callNum.toString().padStart(4, '0')
+    },
+    assignCard(card) {
+      this.currentAssign = card
+      // console.log(this.currentAssign.callNum)
+    },
+    assignFunc() {
+      if(this.currentAssign.callNum) {
+
+        // this.$store.state.infoInline
+
+        console.log(this.currentAssign.serveCate+this.currentAssign.callNum+this.currentCard.counterName)
+        alert(this.currentAssign.serveCate + ': ' + this.currentAssign.callNum + ' 指定給 ' + this.currentCard.counterName)
+      } else {
+        alert('請選取欲叫號的客戶。')
+      }
+      
     }
   },
 
@@ -271,7 +319,7 @@ export default {
     background: linear-gradient(to bottom,  #a81818 31%,#ec8c8c 100%);
   } */
   .call-assign {
-    background: rgba(100, 100, 100, .5);
+    /* background: rgba(100, 100, 100, .5); */
     position: absolute;
     top: 60px;
     z-index: 1;
@@ -289,6 +337,75 @@ export default {
     /* background: rgba(100, 100, 100, .5); */
     width: 50px;
     height: 50px;
+  }
+  .call-assign-list {
+    background: #fff;
+    border: #888888 2px solid;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .call-assign-list-title {
+    /* background: rgb(255, 135, 135); */
+    line-height: 50px;
+    width: 90%;
+    border-bottom: #d70c18 3px solid;
+  }
+  .call-assign-list-nav {
+    /* background: rgb(164, 158, 248); */
+    width: 90%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .call-assign-list-nav-cate {
+    display: flex;
+  }
+  .call-assign-list-nav-cate-dropdown {
+    width: 120px;
+    height: 30px;
+    margin-left: 10px;
+    font-size: 18px;
+  }
+  .call-assign-list-nav-cate-dropdown option {
+    font-size: 14px;
+  }
+  .call-assign-list-content {
+    border: #999999 2px solid;
+    margin-bottom: 30px;
+    width: 90%;
+  }
+  .call-assign-list-content-header {
+    background: rgb(120, 240, 136);
+    display: flex;
+    border-bottom: #999999 2px solid;
+  }
+  .call-assign-list-content-header-item {
+    flex: 1;
+    display: flex;
+    align-content: center;
+    line-height: 35px;
+  }
+  .call-assign-list-content-data {
+    height: 350px;
+    overflow-y: scroll;
+  }
+  .call-assign-list-content-row {
+    display: flex;
+  }
+  .assignActive {
+    background: rgb(126, 246, 255);
+  }
+  .call-assign-list-content-row-item {
+    flex: 1;
+    display: flex;
+    align-content: center;
+    line-height: 35px;
   }
   .counter .cards {
     flex: 1;
@@ -358,7 +475,6 @@ export default {
   .counter .sign-in {
     font-size: 1.2rem;
   }
-
   .counter .serve-t {
     font-size: .9rem;
     color: #727272;
@@ -366,7 +482,6 @@ export default {
   .counter .warn {
     color: #d70c18;
   }
-
   .counter .card-bar {
     display: flex;
     justify-content: space-around;
@@ -381,7 +496,6 @@ export default {
   .counter .inactive-status {
     color: #727272;
   }
-
   .callCardShow-fade-enter-active,
   .callCardShow-fade-leave-active {
     transition: all 0.2s;
@@ -399,7 +513,6 @@ export default {
     align-items: center;
     margin: 0px 10px;
   }
-
   .service-chart-nav {
     width: 100%;
     display: flex;
@@ -410,19 +523,16 @@ export default {
     text-decoration: none;
     margin-bottom: 20px;
   }
-
   .service-chart-content {
     width: 100%;
     display: flex;
   }
-
   .service {
     width: 160px;
     display: flex;
     align-items: center;
     height: 150px;
   }
-
   .service-col {
     height: 100%;
     width: 100%;
@@ -432,12 +542,10 @@ export default {
     font-weight: bold;
     font-size: 1.3rem;
   }
-
   .chart {
     width: 100%;
     margin-left: 20px;
   }
-
   .counter .three-d-btn {
     line-height:30px;
     position: relative;
@@ -453,7 +561,6 @@ export default {
     border: none;
     border-radius: 5em;
   }
-
   .counter .three-d-btn:before {
     content: "";
     width: 110px; 
@@ -469,7 +576,6 @@ export default {
     background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.7) 8%,rgba(255,255,255,0) 100%);
     transition:  all 0.1s ease-in-out;
   }
-
   .counter .active{
     background: linear-gradient(to bottom,  #a81818 31%,#ec8c8c 100%);
   }

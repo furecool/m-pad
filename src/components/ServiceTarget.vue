@@ -36,15 +36,17 @@ export default {
     }
   },
   watch: {
-
     obj: function() {
-      this.dataGen();
-      this.RadarChart(".radarChart", this.data);
-    }
-    
+      this.init()
+    }    
   },
   methods: {
 
+    init() {
+      this.dataGen();
+      this.RadarChart(".radarChart", this.data);
+    },
+    
     dataGen() {
       this.data = [
           // 最小值
@@ -351,7 +353,7 @@ export default {
         
           return ret;
         
-        },
+      },
 
   },
 }
