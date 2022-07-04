@@ -230,7 +230,8 @@ export default {
       clearTimeout(this.loop)
     },
     callNow() {
-      alert('立即叫號至櫃台: ' + this.currentCard.counterNum + '\n櫃員: ' + this.currentCard.counterName)
+      alert(this.$store.state.infoInline[0].serveCate + ' - ' + this.$store.state.infoInline[0].callNum + '\n立即叫號至櫃台: ' + this.currentCard.counterNum + '\n櫃員: ' + this.currentCard.counterName)
+      this.$store.state.infoInline.splice(0,1)
       this.callCardShow = false
     },
     callAssign() {
@@ -259,6 +260,7 @@ export default {
     assignFunc() {
       if(this.currentAssign.callNum) {
         alert('客戶: ' + this.currentAssign.serveCate + ' - ' + this.currentAssign.callNum + '\n指定至櫃檯: ' + this.currentCard.counterNum + '\n櫃員: ' + this.currentCard.counterName)
+        this.$store.state.infoInline = this.$store.state.infoInline.filter((card) => card.serveCate !== this.currentAssign.serveCate || card.callNum !== this.currentAssign.callNum)
       } else {
         alert('請選取欲叫號的客戶。')
       }
