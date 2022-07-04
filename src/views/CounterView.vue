@@ -8,7 +8,7 @@
         <div class="cards-box">
           <transition name="callCardShow-fade">
             <div id="callCard" class="call-card" v-show="callCardShow">
-              <div class="three-d-btn" @click="callCardClose">立即叫號</div>
+              <div class="three-d-btn" @click="callNow">立即叫號</div>
               <div class="three-d-btn" @click="callAssign">指定叫號</div>
             </div>
           </transition>
@@ -146,19 +146,23 @@ export default {
       callAssignShow: false,
       tData: {},
       currentServeCate: '臺幣交易',
-      currentAssign: {}
+      currentAssign: {},
+      infoCounter: []
     }
+  },
+  activated() {
+    this.setTdata()
   },
   watch: {
     '$store.state.infoCounter': function() {
-      if(JSON.stringify(this.currentCard) === '{}') {
-        this.currentCard = this.$store.state.infoCounter[0]
-      }
       this.setTdata()
     },
   },
   methods: {
     setTdata() {
+      if(!this.currentCard.counterName && this.$store.state.infoCounter[0]) {
+        this.currentCard = this.$store.state.infoCounter[0]
+      }
       this.tData.waitTMax = Math.max.apply(null, this.$store.state.infoCounter.map(function (o) {
         return o.waitT;
         }))
@@ -206,7 +210,7 @@ export default {
       if(card.counterName) {
         this.loop = setTimeout(() => {
           let callCard = document.getElementById("callCard")
-          if(e.targetTouches[0].clientX <= 850) {
+          if(window.innerWidth - e.targetTouches[0].clientX >= 170) {
             callCard.style.left = (e.targetTouches[0].clientX - 42) + 'px'
           } else {
             callCard.style.left = (e.targetTouches[0].clientX - 160) + 'px'
@@ -224,6 +228,10 @@ export default {
     },
     callTouchend () {
       clearTimeout(this.loop)
+    },
+    callNow() {
+      alert('立即叫號至櫃台: ' + this.currentCard.counterNum + '\n櫃員: ' + this.currentCard.counterName)
+      this.callCardShow = false
     },
     callAssign() {
       this.callAssignShow = true
@@ -247,15 +255,10 @@ export default {
     },
     assignCard(card) {
       this.currentAssign = card
-      // console.log(this.currentAssign.callNum)
     },
     assignFunc() {
       if(this.currentAssign.callNum) {
-
-        // this.$store.state.infoInline
-
-        console.log(this.currentAssign.serveCate+this.currentAssign.callNum+this.currentCard.counterName)
-        alert(this.currentAssign.serveCate + ': ' + this.currentAssign.callNum + ' 指定給 ' + this.currentCard.counterName)
+        alert('客戶: ' + this.currentAssign.serveCate + ' - ' + this.currentAssign.callNum + '\n指定至櫃檯: ' + this.currentCard.counterNum + '\n櫃員: ' + this.currentCard.counterName)
       } else {
         alert('請選取欲叫號的客戶。')
       }
@@ -272,6 +275,8 @@ export default {
     flex-direction: column;
   }
   .counter .content {
+    width: 90%;
+    margin: 0 auto 3px;
     padding: 10px 0 0 0;
     /* background-color: rgba(0, 0, 0, .15); */
     position: absolute;
@@ -296,7 +301,7 @@ export default {
     font-size: 16px;
     font-weight: bold;
     flex: 1;
-    margin: 5px 10px 0;
+    margin-top: 5px;
   }
   .offline-btn i {
     font-size: 24px;
@@ -375,9 +380,12 @@ export default {
   .call-assign-list-nav-cate-dropdown option {
     font-size: 14px;
   }
+  .call-assign-list-nav-assign {
+    color: #fff;
+  }
   .call-assign-list-content {
     border: #999999 2px solid;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     width: 90%;
   }
   .call-assign-list-content-header {
@@ -411,8 +419,6 @@ export default {
     flex: 1;
     display: flex;
     overflow-x: auto;
-    margin-left: 10px;
-    margin-right: 10px;
   }
   .counter .cards::-webkit-scrollbar {
     display: none;
@@ -489,7 +495,6 @@ export default {
     background-color: #b1b1b1;
     /* background-color: rgb(226, 226, 226); */
   }
-  /* .counter .serve-g {} */
   .counter .status {
     color: #d70c18;
   }
@@ -511,7 +516,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0px 10px;
   }
   .service-chart-nav {
     width: 100%;

@@ -65,8 +65,8 @@ export default {
     },
     waitMin(card) {
       let min = Math.floor(card.waitT /60)
-      window.sec = Math.floor(((card.waitT /60) - min)*60)
-      return min.toString().padStart(2,'0');;
+      window.sec = card.waitT - min*60
+      return min.toString().padStart(2,'0');
     },
     waitSec() {
       return  window.sec.toString().padStart(2,'0');
