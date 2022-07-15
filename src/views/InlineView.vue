@@ -1,8 +1,6 @@
 <template>
   <div class="inline">
-
     <div class="wrapper">
-
       <div class="content" v-for="item in $store.state.cates" :key="item.id">
 
         <div class="cate">
@@ -30,11 +28,7 @@
         </div>
 
       </div>
-
     </div>
-
-    
-
   </div>
 </template>
 
@@ -102,7 +96,7 @@ export default {
 
 <style>
 
-  .wrapper {
+  .inline .wrapper {
     display: flex;
     flex-direction: column;
   }

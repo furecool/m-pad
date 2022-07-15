@@ -92,7 +92,7 @@ export default {
 
 <style>
 
-  .wrapper {
+  .take .wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;

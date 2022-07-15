@@ -1,5 +1,6 @@
 <template>
   <div class="counter">
+    <div class="wrapper">
       <div class="content">
         <div class="call-card-close" v-if="callCardShow" @click="callCardClose"></div>
 
@@ -124,7 +125,7 @@
         </div>
 
       </div>
-
+    </div>
   </div>
 </template>
 <script>
@@ -272,20 +273,18 @@ export default {
 </script>
 <style>
 
-  .wrapper {
+  .counter .wrapper {
     display: flex;
     flex-direction: column;
   }
   .counter .content {
     width: 90%;
-    margin: 0 auto 3px;
-    padding: 10px 0 0 0;
+    /* margin: 10px auto 0; */
+    margin: 0 auto;
     /* background-color: rgba(0, 0, 0, .15); */
     position: absolute;
-    left: 40px;
-    right: 40px;
-    bottom: 60px;
-    top: 105px;
+    left: 0;
+    right: 0;
   }
   .call-card-close {
     position: absolute;
