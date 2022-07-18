@@ -12,6 +12,9 @@ var store = new Vuex.Store({
   state:{
     infoInline: [],
     infoCounter: [],
+    infoReview: [],
+    infoIdentity: [],
+    infoTrade: [],
     cates: [
       "臺幣交易",
       "各項申請",

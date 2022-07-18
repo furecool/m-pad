@@ -27,16 +27,16 @@
             <div class="review__content__sideBar__listBox">
               <div class="sidebar__title">身分待覆核清單</div>
               <ul class="sidebar__list">
-                <li class="sidebar__list__item">
-                  2022-07-11-0999-3601-01-00001
+                <li v-for="identity in $store.state.infoIdentity" :key="identity.id" class="sidebar__list__item" @click="setcurrentReview(identity, 'i')">
+                  {{identity.reviewString}}
                 </li>
               </ul>
             </div>
             <div class="review__content__sideBar__listBox">
               <div class="sidebar__title">交易待覆核清單</div>
               <ul class="sidebar__list">
-                <li class="sidebar__list__item">
-                  2022-07-11-0999-8503-04-00002
+                <li v-for="trade in $store.state.infoTrade" :key="trade.id" class="sidebar__list__item" @click="setcurrentReview(trade, 't')">
+                  {{trade.reviewString}}
                 </li>
               </ul>
             </div>
@@ -46,22 +46,22 @@
             <div class="review__content__main__content">
               <div class="review__content__main__content__text">
                 <div class="review__content__main__content__text__item">
-                  <div class="main__label">辦理分行: <p></p></div>
-                  <div class="main__label">辦理業務: <p>約定轉入帳號</p></div>
-                  <div class="main__label">辦理行員: <p>1048372</p></div>
-                  <div class="main__label">視訊號碼: <p>3611</p></div>
-                  <div class="main__label">交易備註: <p></p></div>
+                  <div class="main__label">辦理分行: <p>{{currentReview.branchName}}</p></div>
+                  <div class="main__label">辦理業務: <p>{{currentReview.category}}</p></div>
+                  <div class="main__label">辦理行員: <p>{{currentReview.clerkId}}</p></div>
+                  <div class="main__label">視訊號碼: <p>{{currentReview.videoNumber}}</p></div>
+                  <div class="main__label">交易備註: <p>{{currentReview.ps}}</p></div>
                 </div>
                 <div class="review__content__main__content__text__item">
                   <div class="text__item__title">客戶資料</div>
-                  <div class="main__label">戶名: <p></p></div>
-                  <div class="main__label">帳號: <p></p></div>
-                  <div class="main__label">身分證號: <p></p></div>
+                  <div class="main__label">戶名: <p>{{currentReview.name}}</p></div>
+                  <div class="main__label">帳號: <p>{{currentReview.account}}</p></div>
+                  <div class="main__label">身分證號: <p>{{currentReview.idNumber}}</p></div>
                 </div>
                 <div class="review__content__main__content__text__item">
                   <div class="text__btn__answer">
-                    <div class="text__btn__pass" @click="pass">通過</div>
-                    <div class="text__btn__reject" @click="reject">退回</div>
+                    <div class="text__btn__pass" @click="answer('pass')">通過</div>
+                    <div class="text__btn__reject" @click="answer('reject')">退回</div>
                   </div>
                   <div class="text__btn__checkAnother" @click="checkAnother">調閱身分覆核頁面</div>
                 </div>
@@ -70,13 +70,13 @@
                 <div class="photo__client">
                   <div class="main__label">現場照片</div>
                   <div class="photo__client__pic">
-                    <img src="../../public/img/review/1-client.png" alt="">
+                    <img :src="currentReview.clientPic">
                   </div>
                 </div>
                 <div class="photo__document">
                   <div class="main__label">交易覆核文件(正面)</div>
                   <div class="photo__document__pic">
-                    <img src="../../public/img/review/1-doc.png" alt="">
+                    <img :src="currentReview.documentPic">
                   </div>
                 </div>
               </div>
@@ -97,22 +97,51 @@ export default {
   },
   data() {
     return {
-      getTime: 500,
-      mainTitle: '交易覆核作業', //身分覆核作業
+      mainTitle: '',
+      currentReview: {}
     }
   },
-  created() {
+  activated() {
+    this.setcurrentReview()
+  },
+  watch: {
+    '$store.state.infoReview': function() {
+      this.setcurrentReview()
+    }
   },
   methods: {
-    pass() {
-      alert('通過')
-    },
-    reject() {
-      alert('退回')
+    answer(answer) {
+      if(this.mainTitle == '身分覆核作業') {
+        this.$store.state.infoIdentity = this.$store.state.infoIdentity.filter((card) => card.reviewString !== this.currentReview.reviewString)
+      } else if(this.mainTitle == '交易覆核作業') {
+        this.$store.state.infoTrade = this.$store.state.infoTrade.filter((card) => card.reviewString !== this.currentReview.reviewString)
+      }
+      if(answer == 'pass') {
+        alert(this.currentReview.reviewString + '通過')
+      } else if(answer == 'reject') {
+        alert(this.currentReview.reviewString + '退回')
+      }
+      this.currentReview = {}
     },
     checkAnother() {
       alert('調閱身分覆核')
     },
+    setcurrentReview(reviewItem, title) {
+      if(!this.currentReview.reviewString && this.$store.state.infoIdentity[0] && !reviewItem) {
+        // console.log("bb !!")
+        this.currentReview = this.$store.state.infoIdentity[0]
+        this.mainTitle = '身分覆核作業'
+      } else if(this.currentReview.reviewString || reviewItem) {
+        // console.log("cc !!")
+        this.currentReview = reviewItem
+        if(title == 'i') {
+          this.mainTitle = '身分覆核作業'
+        } else if(title == 't') {
+          this.mainTitle = '交易覆核作業'
+        }
+      }
+      // console.log(this.currentReview.name)
+    }
   },
 
 }

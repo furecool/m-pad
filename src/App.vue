@@ -70,14 +70,17 @@ export default {
   },
   created() {
     let vm = this
-    let url = 'https://furecool.github.io/m-pad/info.json'
-    // let url = '/info.json'
+    // let url = 'https://furecool.github.io/m-pad/info.json'
+    let url = '/info.json'
     function getInfo() {
       vm.$ajax.get(url)
       .then(function(res) {
-        console.log("get data...🚀")
+        console.log("🚀get data...from " + url)
         vm.$store.state.infoInline = res.data.inline
         vm.$store.state.infoCounter = res.data.counter
+        vm.$store.state.infoReview = res.data.review
+        vm.$store.state.infoIdentity = res.data.review.identity
+        vm.$store.state.infoTrade = res.data.review.trade
       })
       .catch(function(err) {
         console.log(err)
