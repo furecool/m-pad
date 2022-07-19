@@ -50,7 +50,7 @@
                   <div class="main__label">辦理業務: <p>{{currentReview.category}}</p></div>
                   <div class="main__label">辦理行員: <p>{{currentReview.clerkId}}</p></div>
                   <div class="main__label">視訊號碼: <p>{{currentReview.videoNumber}}</p></div>
-                  <div class="main__label">交易備註: <p>{{currentReview.ps}}</p></div>
+                  <div v-if="mainTitle == '交易覆核作業'" class="main__label">交易備註: <p>{{currentReview.ps}}</p></div>
                 </div>
                 <div class="review__content__main__content__text__item">
                   <div class="text__item__title">客戶資料</div>
@@ -63,7 +63,7 @@
                     <div class="text__btn__pass" @click="answer('pass')">通過</div>
                     <div class="text__btn__reject" @click="answer('reject')">退回</div>
                   </div>
-                  <div class="text__btn__checkAnother" @click="checkAnother">調閱身分覆核頁面</div>
+                  <div v-if="mainTitle == '交易覆核作業'" class="text__btn__checkAnother" @click="checkAnother">調閱身分覆核頁面</div>
                 </div>
               </div>
               <div class="review__content__main__content__photo">
@@ -131,7 +131,7 @@ export default {
         // console.log("bb !!")
         this.currentReview = this.$store.state.infoIdentity[0]
         this.mainTitle = '身分覆核作業'
-      } else if(this.currentReview.reviewString || reviewItem) {
+      } else if(reviewItem) {
         // console.log("cc !!")
         this.currentReview = reviewItem
         if(title == 'i') {
@@ -330,6 +330,11 @@ export default {
   }
   .photo__document__pic {
     width: 200px;
+    height: 150px;
   }
+  /* .photo__document__pic img {
+    height: 100%;
+    width: 100%;
+  } */
 
 </style>
