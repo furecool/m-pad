@@ -296,5 +296,89 @@
             "sati":"",
             "avgPoint":""
         }
-    ]
+    ],
+    "review": {
+        "identity": [
+            {
+                "reviewString": "2022-07-11-0999-3601-01-00001",
+                "branchName": "內湖",
+                "category": "約定轉入帳號",
+                "clerkId": "1048372",
+                "videoNumber": "3611",
+                "ps": "",
+                "name": "王一分",
+                "account": "12345678901111",
+                "idNumber": "A123456111",
+                "clientPic": "./img/review/1-client.jpg",
+                "documentPic": "./img/review/1-doc.png"
+            },
+            {
+                "reviewString": "2022-07-11-0999-3601-01-00002",
+                "branchName": "內湖",
+                "category": "開戶",
+                "clerkId": "1055600",
+                "videoNumber": "3612",
+                "ps": "",
+                "name": "王二分",
+                "account": "12345678902222",
+                "idNumber": "A123456222",
+                "clientPic": "./img/review/2-client.jpg",
+                "documentPic": "./img/review/1-doc.png"
+            },
+            {
+                "reviewString": "2022-07-11-0999-3601-01-00003",
+                "branchName": "內湖",
+                "category": "申請貸款",
+                "clerkId": "1034551",
+                "videoNumber": "3633",
+                "ps": "",
+                "name": "王三分",
+                "account": "12345678903333",
+                "idNumber": "A123456333",
+                "clientPic": "./img/review/3-client.jpg",
+                "documentPic": "./img/review/1-doc.png"
+            }
+        ],
+        "trade": [
+            {
+                "reviewString": "2022-07-18-0999-3601-01-00001",
+                "branchName": "內湖",
+                "category": "台幣交易",
+                "clerkId": "1016735",
+                "videoNumber": "4611",
+                "ps": "無",
+                "name": "李一交",
+                "account": "11115678901234",
+                "idNumber": "A123456789",
+                "clientPic": "./img/review/11-client.jpg",
+                "documentPic": "./img/review/1-doc.png"
+            },
+            {
+                "reviewString": "2022-07-18-0999-3601-01-00002",
+                "branchName": "內湖",
+                "category": "外幣交易",
+                "clerkId": "1009463",
+                "videoNumber": "4622",
+                "ps": "無",
+                "name": "李二交",
+                "account": "22225678901234",
+                "idNumber": "A223456789",
+                "clientPic": "./img/review/12-client.jpg",
+                "documentPic": "./img/review/1-doc.png"
+            },
+            {
+                "reviewString": "2022-07-18-0999-3601-01-00003",
+                "branchName": "內湖",
+                "category": "繳費",
+                "clerkId": "1036458",
+                "videoNumber": "4522",
+                "ps": "無",
+                "name": "李三交",
+                "account": "33335678901234",
+                "idNumber": "A323456789",
+                "clientPic": "./img/review/13-client.jpg",
+                "documentPic": "./img/review/1-doc.png"
+            }
+        ]
+    }
 }
